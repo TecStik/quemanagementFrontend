@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import SignIn from './src/SignIn/SignIn';
 import AuthNavigator from './src/AuthNavigation';
+import SplashScreen from './src/SplashScreen/SplashScreen';
 // import SignUP from './src/SignUP/SignUP';
 // import List from './src/List/List';
 // import UserHome from './src/UserHome/UserHome';
@@ -28,6 +29,7 @@ function App() {
   return (
     <NavigationContainer options={{headerShown: false}}>
       <AuthNavigator />
+      {/* <SplashScreen /> */}
       {/* <SignIn /> */}
       {/* <Dashboard /> */}
       {/* <ManagerHome /> */}
