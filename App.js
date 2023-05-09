@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {
+  useColorScheme,
   SafeAreaView,
+  StyleSheet,
   ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 import SignIn from './src/SignIn/SignIn';
 import AuthNavigator from './src/AuthNavigation';
 import SplashScreen from './src/SplashScreen/SplashScreen';
+import WelcomScreen from './src/WelcomScreen/WelcomScreen';
 // import SignUP from './src/SignUP/SignUP';
 // import List from './src/List/List';
 // import UserHome from './src/UserHome/UserHome';
@@ -21,23 +22,25 @@ import SplashScreen from './src/SplashScreen/SplashScreen';
 // import Registration from './src/Registration/Registration';
 // import Franchise from './src/Franchise/Franchise';
 
-
-
+import {NativeBaseProvider} from 'native-base';
 // import Header from './src/Header/Header';
 
 function App() {
   return (
     <NavigationContainer options={{headerShown: false}}>
-      <AuthNavigator />
-      {/* <SplashScreen /> */}
-      {/* <SignIn /> */}
-      {/* <Dashboard /> */}
-      {/* <ManagerHome /> */}
-      {/* <AdminHome /> */}
-      {/* <UserHome /> */}
-      {/* <List /> */}
-      {/* <Franchise /> */}
-      {/* <Registration /> */}
+      <NativeBaseProvider>
+        {/* <AuthNavigator /> */}
+        <WelcomScreen />
+        {/* <SplashScreen /> */}
+        {/* <SignIn /> */}
+        {/* <Dashboard /> */}
+        {/* <ManagerHome /> */}
+        {/* <AdminHome /> */}
+        {/* <UserHome /> */}
+        {/* <List /> */}
+        {/* <Franchise /> */}
+        {/* <Registration /> */}
+      </NativeBaseProvider>
     </NavigationContainer>
   );
 }

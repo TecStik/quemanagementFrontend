@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, TouchableOpacity, Image, StyleSheet, Text, Di
 import LinearGradient from 'react-native-linear-gradient'
 import home from '../../assets/header-icon/home.png';
 import back from '../../assets/header-icon/back.png';
-
+import { NativeBaseProvider} from "native-base";
 
 
 const windowWidth = Dimensions.get('window').width;
