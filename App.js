@@ -23,6 +23,7 @@ import Registration from './src/Registration/Registration';
 import Franchise from './src/Franchise/Franchise';
 
 import {NativeBaseProvider} from 'native-base';
+import FranchiseList from './src/FranchiseList/FranchiseList';
 // import Header from './src/Header/Header';
 
 
@@ -32,7 +33,7 @@ function App() {
     <NavigationContainer options={{headerShown: false}}>
       <NativeBaseProvider>
         <AuthNavigator />
-        
+        {/* <FranchiseList /> */}
         {/* <WelcomScreen /> */}
         {/* <SplashScreen /> */}
 
