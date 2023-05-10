@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, TouchableOpacity, Image, StyleSheet, Text, Di
 import LinearGradient from 'react-native-linear-gradient'
 import home from '../../assets/header-icon/home.png';
 import back from '../../assets/header-icon/back.png';
-import { NativeBaseProvider} from "native-base";
+import { NativeBaseProvider } from "native-base";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -26,13 +26,13 @@ function Header({ ScreenName }) {
                 <TouchableOpacity>
                     <Image style={styles.image} source={back} />
                 </TouchableOpacity>
-                <Text style={{ color: "white", fontSize: 25, marginLeft: "4%", marginTop: "2%" }}>{ScreenName}</Text>
+                <Text style={{ color: "white", fontSize: 30, marginLeft: "4%", marginTop: "2%", fontWeight: "bold" }}>{ScreenName}</Text>
                 <TouchableOpacity>
                     <Image style={styles.image} source={home} />
                 </TouchableOpacity>
             </View>
             <View style={{
-                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "120%", borderColor: "yellow",
+                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "100%", borderColor: "yellow",
                 borderBottomWidth: 5,
             }}>
                 <Text>Second Header</Text>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         marginRight: "4%"
     },
     Topheader: {
-        backgroundColor: "#1D7874", width: "100%", height: "100%", zIndex: 1,
+        backgroundColor: "#1D7874", width: "100%", height: "95%", zIndex: 1,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",

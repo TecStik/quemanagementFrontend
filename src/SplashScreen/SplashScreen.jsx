@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet, Text, View, Image,Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/logo/LOG3.png';
 import Header from "../Header/Header";
+import SignUP from '../SignUP/SignUP';
+import WelcomScreen from '../WelcomScreen/WelcomScreen';
 
 
 
@@ -14,6 +16,18 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function SplashScreen() {
+
+    const navigation = useNavigation();
+    const [loading, setloading] = useState(true);
+
+
+    useEffect(() => {
+        setloading(false);
+        setTimeout(() => {
+            setloading(true) // 1
+        }, 5000);
+    }, [])
+
 
     return (
 
@@ -25,15 +39,17 @@ export default function SplashScreen() {
                 end={{ x: 1, y: 0.5 }}
             >
                 <ScrollView>
-                    <View style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginTop: windowHeight / 4.5
-                    }}>
-                        <View style={styles.container}>
-                            <Image style={styles.image} source={logo} />
+                    {loading ? <WelcomScreen /> :
+                        <View style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginTop: windowHeight / 4.5
+                        }}>
+                            <View style={styles.container}>
+                                <Image style={styles.image} source={logo} />
+                            </View>
                         </View>
-                    </View>
+                    }
                 </ScrollView>
             </LinearGradient>
         </>

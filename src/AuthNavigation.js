@@ -10,12 +10,24 @@ import Dashboard from './Dashboard/Dashboard';
 import UserHome from './UserHome/UserHome';
 import Registration from './Registration/Registration';
 import Franchise from './Franchise/Franchise';
+import WelcomScreen from './WelcomScreen/WelcomScreen';
+import SplashScreen from './SplashScreen/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="SplashScreen"
+        options={{headerShown: false}}
+        component={SplashScreen}
+      />
+      <Stack.Screen
+        name="WelcomScreen"
+        options={{headerShown: false}}
+        component={WelcomScreen}
+      />
       <Stack.Screen
         name="SignUP"
         options={{headerShown: false}}

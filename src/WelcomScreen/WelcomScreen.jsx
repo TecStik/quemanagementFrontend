@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import { useNavigation } from '@react-navigation/native';
+import { VStack, Stack, Box, Input, Center, Button } from 'native-base';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-import { VStack, Center } from 'native-base';
 
 export default function WelcomScreen() {
+
+
 
     const navigation = useNavigation();
 
@@ -26,36 +30,43 @@ export default function WelcomScreen() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header />
+                <Header ScreenName="Welcome" />
+
                 <ScrollView>
-                    <View
-                        style={{ marginTop: windowHeight / 5.6, alignContent: "center" }}
-                    >
-                            <VStack space={3} justifyContent="center" alignItems="center">
-                                <Center h="20" w="60" bg="primary.300" rounded="md" shadow={3} />
-                                <Center h="20" w="60" bg="primary.500" rounded="md" shadow={3} />
-                                <Center h="20" w="40" bg="primary.700" rounded="md" shadow={3} />
-                            </VStack>
-                        {/* <View >
 
-                        </View> */}
+                    <View style={{ marginTop: windowHeight / 3.6, alignContent: "center" }}>
+                        <Stack space={4} w="75%" maxW="300px" mx="auto">
 
-                        {/* <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                        </TouchableOpacity> */}
+                            <TouchableOpacity onPress={() => navigation.navigate('SignUP')}>
+                                <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
+                                    fontSize: "2xl",
+                                    color: "#679289"
+                                }} style={styles.BoxOutline}>
+                                    <FontAwesome5 name="user-check" size={35} color="#679289" style={{ marginRight: "5%" }} />
+                                    Rigester
+                                </Box>
+                            </TouchableOpacity>
 
-                        {/* <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                            <View style={styles.container}>
-                                <Text style={{ fontSize: 25, color: "white" }}>Ahmed Raza</Text>
-                                <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
-                                    <View style={styles.numberBox}>
-                                        <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>04</Text>
-                                    </View>
-                                    <View style={styles.numberBox}>
-                                        <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>05</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </TouchableOpacity> */}
+                            <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                                <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
+                                    fontSize: "2xl",
+                                    color: "#679289"
+                                }} style={styles.BoxOutline}>
+                                    <Fontisto name="locked" size={35} color="#679289" style={{ marginRight: "5%" }} />
+                                    Login
+                                </Box>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                                <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
+                                    fontSize: "2xl",
+                                    color: "#679289"
+                                }} style={styles.BoxOutline}>
+                                    <FontAwesome5 name="users" size={35} color="#679289" style={{ marginRight: "5%" }} />
+                                    Visitor
+                                </Box>
+                            </TouchableOpacity>
+                        </Stack>
 
                     </View>
                 </ScrollView>
@@ -96,6 +107,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderBottomEndRadius: 15,
         borderBottomStartRadius: 15,
+    },
+    BoxOutline: {
+        borderWidth: 6,
+        borderRadius: 15,
+        borderColor: "#679289",
+        marginTop: windowHeight / 21,
+        display: "flex",
+        flexDirection: "row",
+
     }
 });
 
