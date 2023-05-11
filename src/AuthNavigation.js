@@ -12,6 +12,7 @@ import Registration from './Registration/Registration';
 import Franchise from './Franchise/Franchise';
 import WelcomScreen from './WelcomScreen/WelcomScreen';
 import SplashScreen from './SplashScreen/SplashScreen';
+import FranchiseList from './FranchiseList/FranchiseList';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,11 @@ const AuthNavigator = () => {
         name="Franchise"
         options={{headerShown: false}}
         component={Franchise}
+      />
+      <Stack.Screen
+        name="FranchiseList"
+        options={{headerShown: false}}
+        component={FranchiseList}
       />
     </Stack.Navigator>
   );

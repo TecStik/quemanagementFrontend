@@ -56,7 +56,7 @@ export default function AdminHome() {
                         </View>
                         <View style={styles.container}>
                             <Image source={appointment} style={{ width: "28%", height: windowHeight / 8 }} />
-                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('FranchiseList')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>List Of Franchies</Text>
                                 </View>
