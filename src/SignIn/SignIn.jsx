@@ -5,6 +5,9 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+import { Url } from "../../Core";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,6 +16,24 @@ export default function App() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
+
+
+    function loginHandler(params) {
+        console.log(email, password);
+        axios({
+            method: "post",
+            url: Url + "/auth/api/userLogin",
+            data: {
+                Email: email,
+                Password: password
+            }
+        }).then((res) => {
+            console.log(res, "====>Response");
+            navigation.navigate('AdminHome')
+        }).catch((err) => {
+            console.log(err, "====>Error");
+        })
+    }
 
     return (
 
@@ -38,7 +59,7 @@ export default function App() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Name."
+                                    placeholder="Name"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(name) => setEmail(name)}
                                 />
@@ -46,7 +67,7 @@ export default function App() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Cell."
+                                    placeholder="Email"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(email) => setEmail(email)}
                                 />
@@ -54,7 +75,7 @@ export default function App() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Password."
+                                    placeholder="Password"
                                     placeholderTextColor="#003f5c"
                                     secureTextEntry={true}
                                     onChangeText={(password) => setPassword(password)}
@@ -63,7 +84,7 @@ export default function App() {
                             <TouchableOpacity>
                                 <Text style={styles.forgot_button}>Forgot Password?</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('AdminHome')}>
+                            <TouchableOpacity style={styles.loginBtn} onPress={loginHandler}>
                                 <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
                             </TouchableOpacity>
                         </View>
@@ -83,8 +104,8 @@ const styles = StyleSheet.create({
         width: windowWidth / 1.2,
         borderRadius: 30,
         // marginTop: "2%",
-        margin:10,
-        padding:10
+        margin: 10,
+        padding: 10
     },
     image: {
         // marginTop:10,

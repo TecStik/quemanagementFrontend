@@ -1,0 +1,1 @@
+export let Url = "https://que-management-server-sshkvhkhua-et.a.run.app"
