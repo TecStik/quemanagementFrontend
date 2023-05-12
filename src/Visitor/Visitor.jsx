@@ -11,7 +11,7 @@ import appointmentCl from '../../assets/appointmentCl.png';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function UserHome() {
+export default function Visitor() {
 
 
     return (
@@ -24,7 +24,7 @@ export default function UserHome() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="User Home"/>
+                <Header ScreenName="Visitor Home"/>
                 <ScrollView>
                     <View style={{ marginTop: windowHeight/5, justifyContent: "center", alignItems: "center" }}>
 

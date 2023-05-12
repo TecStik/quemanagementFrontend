@@ -37,7 +37,7 @@ export default function WelcomScreen() {
                     <View style={{ marginTop: windowHeight / 3.6, alignContent: "center" }}>
                         <Stack space={4} w="75%" maxW="300px" mx="auto">
 
-                            <TouchableOpacity onPress={() => navigation.navigate('SignUP')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
                                 <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
                                     fontSize: "2xl",
                                     color: "#679289"
@@ -57,7 +57,7 @@ export default function WelcomScreen() {
                                 </Box>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Visitor')}>
                                 <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
                                     fontSize: "2xl",
                                     color: "#679289"

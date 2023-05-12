@@ -7,12 +7,14 @@ import AdminHome from './AdminHome/AdminHome';
 import ManagerHome from './ManagerHome/ManagerHome';
 import List from './List/List';
 import Dashboard from './Dashboard/Dashboard';
-import UserHome from './UserHome/UserHome';
 import Registration from './Registration/Registration';
 import Franchise from './Franchise/Franchise';
 import WelcomScreen from './WelcomScreen/WelcomScreen';
 import SplashScreen from './SplashScreen/SplashScreen';
 import FranchiseList from './FranchiseList/FranchiseList';
+import AddManager from './AddManager/AddManager';
+import Visitor from './Visitor/Visitor';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +52,11 @@ const AuthNavigator = () => {
         component={ManagerHome}
       />
       <Stack.Screen
+        name="AddManager"
+        options={{headerShown: false}}
+        component={AddManager}
+      />
+      <Stack.Screen
         name="List"
         options={{headerShown: false}}
         component={List}
@@ -60,9 +67,9 @@ const AuthNavigator = () => {
         component={Dashboard}
       />
       <Stack.Screen
-        name="UserHome"
+        name="Visitor"
         options={{headerShown: false}}
-        component={UserHome}
+        component={Visitor}
       />
       <Stack.Screen
         name="Registration"

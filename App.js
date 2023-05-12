@@ -15,7 +15,6 @@ import SplashScreen from './src/SplashScreen/SplashScreen';
 import WelcomScreen from './src/WelcomScreen/WelcomScreen';
 import SignUP from './src/SignUP/SignUP';
 import List from './src/List/List';
-import UserHome from './src/UserHome/UserHome';
 import AdminHome from './src/AdminHome/AdminHome';
 import Dashboard from './src/Dashboard/Dashboard';
 import ManagerHome from './src/ManagerHome/ManagerHome';
@@ -24,9 +23,9 @@ import Franchise from './src/Franchise/Franchise';
 
 import {NativeBaseProvider} from 'native-base';
 import FranchiseList from './src/FranchiseList/FranchiseList';
+import AddManager from './src/AddManager/AddManager';
+import Visitor from './src/Visitor/Visitor';
 // import Header from './src/Header/Header';
-
-
 
 function App() {
   return (
@@ -36,13 +35,14 @@ function App() {
         {/* <FranchiseList /> */}
         {/* <WelcomScreen /> */}
         {/* <SplashScreen /> */}
+        {/* <AddManager /> */}
 
         {/* <SignUP /> */}
         {/* <SignIn /> */}
         {/* <Dashboard /> */}
         {/* <ManagerHome /> */}
         {/* <AdminHome /> */}
-        {/* <UserHome /> */}
+        {/* <Visitor /> */}
         {/* <List /> */}
         {/* <Franchise /> */}
         {/* <Registration /> */}

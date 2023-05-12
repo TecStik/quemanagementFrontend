@@ -44,7 +44,7 @@ export default function Dashboard() {
                          <View style={styles.container}>
                             <View>
                                 <Text style={{ fontSize: 25, color: "black" }}>Zong</Text>
-                                <Text style={{ fontSize: 25, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
+                                <Text style={{ fontSize: 22, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
                             </View>
                             <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
                                 <View style={styles.numberBox}>
@@ -60,7 +60,7 @@ export default function Dashboard() {
                          <View style={styles.container}>
                             <View>
                                 <Text style={{ fontSize: 25, color: "black" }}>Clinic</Text>
-                                <Text style={{ fontSize: 25, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
+                                <Text style={{ fontSize: 22, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
                             </View>
                             <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
                                 <View style={styles.numberBox}>
@@ -76,7 +76,7 @@ export default function Dashboard() {
                          <View style={styles.container}>
                             <View>
                                 <Text style={{ fontSize: 25, color: "black" }}>Saloon</Text>
-                                <Text style={{ fontSize: 25, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
+                                <Text style={{ fontSize: 22, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text>
                             </View>
                             <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
                                 <View style={styles.numberBox}>

@@ -4,15 +4,21 @@ import {
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
-import { useNavigation } from '@react-navigation/native';
+import DropDownPicker from 'react-native-dropdown-picker'
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function App() {
+export default function AddManager() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigation = useNavigation();
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'Admin', value: 'Admin' },
+        { label: 'User', value: 'User' },
+    ]);
 
     return (
 
@@ -25,20 +31,18 @@ export default function App() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Sign IN" />
+                <Header ScreenName="AddManager" />
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: windowHeight / 3.7
+                        marginTop: windowHeight / 4.5
                     }}>
                         <View style={styles.container}>
-                            {/* <Image style={styles.image} source={require("./assets/log2.png")} />  */}
-                            {/* <StatusBar style="auto" /> */}
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Name."
+                                    placeholder="Name"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(name) => setEmail(name)}
                                 />
@@ -46,7 +50,15 @@ export default function App() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Cell."
+                                    placeholder="Email/ID"
+                                    placeholderTextColor="#003f5c"
+                                    onChangeText={(name) => setEmail(name)}
+                                />
+                            </View>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="Phone"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(email) => setEmail(email)}
                                 />
@@ -54,16 +66,37 @@ export default function App() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Password."
+                                    placeholder="Password"
                                     placeholderTextColor="#003f5c"
                                     secureTextEntry={true}
                                     onChangeText={(password) => setPassword(password)}
                                 />
                             </View>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="Re-Type Password"
+                                    placeholderTextColor="#003f5c"
+                                    secureTextEntry={true}
+                                    onChangeText={(password) => setPassword(password)}
+                                />
+                            </View>
+                            <View >
+                                <DropDownPicker
+                                    open={open}
+                                    value={value}
+                                    items={items}
+                                    setOpen={setOpen}
+                                    setValue={setValue}
+                                    setItems={setItems}
+                                    style={styles.inputView}
+
+                                />
+                            </View>
                             <TouchableOpacity>
-                                <Text style={styles.forgot_button}>Forgot Password?</Text>
+                                {/* <Text style={styles.forgot_button}>Forgot Password?</Text> */}
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('AdminHome')}>
+                            <TouchableOpacity style={styles.loginBtn}>
                                 <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
                             </TouchableOpacity>
                         </View>
@@ -79,39 +112,28 @@ const styles = StyleSheet.create({
         backgroundColor: "#679289",
         justifyContent: "center",
         alignItems: "center",
-        height: windowHeight / 2,
+        // height: windowHeight / 2,
         width: windowWidth / 1.2,
         borderRadius: 30,
-        // marginTop: "2%",
-        margin:10,
-        padding:10
-    },
-    image: {
-        // marginTop:10,
-        // marginBottom: 40,
+        // marginTop: "20%",
+        margin: 10,
+        padding: 10
     },
     inputView: {
         backgroundColor: "#FFFFFF",
         borderRadius: 30,
-        width: "85%",
-        height: 50,
-        marginBottom: 25,
+        width: windowWidth / 1.3,
+        marginBottom: 17,
         alignItems: "center",
-        borderColor: "#1D7874",
-        borderWidth: 5,
         height: 60,
-        // marginTop: "2%",
+        borderColor: "#1D7874",
+        borderWidth: 5
     },
     TextInput: {
-        flex: 1,
         height: 50,
-        fontSize: 22,
-        padding: 10,
-        // marginLeft: 20,
-    },
-    forgot_button: {
-        height: 30,
-        // marginBottom: 30,
+        flex: 1,
+        // padding: 10,
+        fontSize: 22
     },
     loginBtn: {
         width: "40%",

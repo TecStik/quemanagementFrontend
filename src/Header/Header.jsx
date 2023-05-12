@@ -11,16 +11,6 @@ const windowHeight = Dimensions.get('window').height;
 
 function Header({ ScreenName }) {
     return (
-        // <View 
-        // style={{display:"flex",flex:1}}
-        // >
-
-        // <LinearGradient
-        //     colors={['#0F3C3A', '#1D7874', '#0F3C3A']}
-        //     // style={{ flex: 1 }}
-        //     start={{ x: 0, y: 0.5 }}
-        //     end={{ x: 1, y: 0.5 }}
-        // >
         <View style={{ position: 'absolute', left: 0, right: 0, zIndex: 1 }}>
             <View style={styles.Topheader}>
                 <TouchableOpacity>
@@ -32,14 +22,12 @@ function Header({ ScreenName }) {
                 </TouchableOpacity>
             </View>
             <View style={{
-                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "100%", borderColor: "yellow",
+                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "85%", borderColor: "yellow",
                 borderBottomWidth: 5,
             }}>
                 <Text>Second Header</Text>
             </View>
         </View>
-        // </LinearGradient>
-        // </View>
     )
 }
 
@@ -50,12 +38,14 @@ const styles = StyleSheet.create({
     image: {
         width: windowWidth / 10,
         height: windowHeight / 20,
-        marginLeft: "4%",
-        // marginTop: "4%",
-        marginRight: "4%"
+        // marginLeft: "4%",
+        margin: "2%",
+        // paddingTop:"2%",
+        // marginTop: "2%",
+        // marginRight: "4%"
     },
     Topheader: {
-        backgroundColor: "#1D7874", width: "100%", height: "95%", zIndex: 1,
+        backgroundColor: "#1D7874", width: "100%", height: "80%", zIndex: 1,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",

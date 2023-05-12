@@ -24,9 +24,9 @@ export default function List() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header />
+                <Header ScreenName="List" />
                 <ScrollView>
-                    <View style={{ marginTop: windowHeight / 5.6 }}>
+                    <View style={{ marginTop: windowHeight / 7 }}>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
                             <View style={styles.twoNumberBox}>
                                 <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>04</Text>

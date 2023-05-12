@@ -25,13 +25,12 @@ export default function AdminHome() {
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
             >
-
                 <Header ScreenName="Admin Home" />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 5 }}>
 
                         <View style={styles.container}>
-                            <Image source={franchise} style={{ width: "28%", height: windowHeight / 8 }} />
+                            <Image source={franchise} style={{ width: "25%", height: windowHeight / 8.5 }} />
                             <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Create franchies</Text>
@@ -39,15 +38,15 @@ export default function AdminHome() {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.container}>
-                            <Image source={addUser} style={{ width: "28%", height: windowHeight / 8 }} />
-                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                            <Image source={addUser} style={{ width: "25%", height: windowHeight / 8.5 }} />
+                            <TouchableOpacity onPress={() => navigation.navigate('AddManager')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Add Manager</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.container}>
-                            <Image source={manager2} style={{ width: "28%", height: windowHeight / 8 }} />
+                            <Image source={manager2} style={{ width: "25%", height: windowHeight / 8.5 }} />
                             <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Assign Manager</Text>
@@ -55,7 +54,7 @@ export default function AdminHome() {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.container}>
-                            <Image source={appointment} style={{ width: "28%", height: windowHeight / 8 }} />
+                            <Image source={appointment} style={{ width: "25%", height: windowHeight / 8.5 }} />
                             <TouchableOpacity onPress={() => navigation.navigate('FranchiseList')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>List Of Franchies</Text>
@@ -92,15 +91,16 @@ const styles = StyleSheet.create({
         width: windowWidth / 2,
         height: 56,
         elevation: 2,
-        borderRadius: 28,
         // marginBottom: 3,
-        backgroundColor: 'white',
         // margin: 10,
-        marginTop: windowHeight / 24,
-        alignItems: "center",
-        justifyContent: "center",
-        borderColor: "#1D7874",
+        marginTop: windowHeight / 30,
+        backgroundColor: 'white',
+        borderRadius: 28,
         borderWidth: 4,
+        borderColor: "#1D7874",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center"
         // alignItems:"flex-end"
     },
     twoNumberBox: {
