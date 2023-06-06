@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
@@ -8,14 +8,22 @@ import appointment from '../../assets/MangerHome/appointment.png';
 import franchise from '../../assets/MangerHome/franchise.png';
 import ticke from '../../assets/MangerHome/ticke.png';
 import summary from '../../assets/MangerHome/summary.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
 export default function ManagerHome() {
 
     const navigation = useNavigation();
+    const [Power, setPower] = useState(false)
 
+
+    const buttonHandler = () => {
+        setPower(current => !current)
+        // console.log(Power)
+    }
 
     return (
 
@@ -35,17 +43,39 @@ export default function ManagerHome() {
                         <View style={styles.container}>
 
                             <View>
-                                <Text style={{ fontSize: 25, color: "black" }}>Current Franchise</Text>
-                                <Text style={{ fontSize: 25, color: "black", marginTop: 5 }}>Current Ticket</Text>
+                                <Text style={{ fontSize: 20, color: "black" }}>Franchise</Text>
+                                <Text style={{ fontSize: 20, color: "black", marginTop: 5 }}>Now Serving</Text>
                             </View>
                             <View style={{}}>
                                 <View style={styles.TwonumberBox}>
-                                    <Text style={{ fontSize: 25, color: "red", textAlign: "center" }}>Zong <Text style={{ fontSize: 15 }}>Sader Branch</Text></Text>
+                                    <ScrollView>
+                                        <Text style={{ fontSize: 20, color: "red", textAlign: "center" }}>Zong <Text style={{ fontSize: 15 }}>ABCD</Text></Text>
+                                    </ScrollView>
                                 </View>
                                 <View style={styles.TwonumberBox}>
-                                    <Text style={{ fontSize: 25, color: "red", textAlign: "center" }}>88</Text>
+                                    <Text style={{ fontSize: 20, color: "red", textAlign: "center" }}>88</Text>
                                     {/* <Text style={{ fontSize: 15, color: "black", width: windowWidth }}>Current No</Text> */}
                                 </View>
+
+                            </View>
+                            <View style={styles.PowerButton}>
+                                <TouchableOpacity onPress={buttonHandler}>
+                                    {Power === false ?
+                                        <Icon name="power-off" size={40} style={{
+                                            color: "white",
+                                            textAlign: "center",
+                                            marginTop: 7
+                                        }} />
+                                        :
+                                        <Icon name="power-off" size={40} style={{
+                                            color: "white", textAlign: "center",
+                                            height: 56,
+                                            padding: 7,
+                                            backgroundColor: 'red',
+                                            borderRadius: 30,
+                                        }} />
+                                    }
+                                </TouchableOpacity>
                             </View>
                         </View>
 
@@ -94,7 +124,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "#679289",
         // backgroundColor: "white",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         // alignItems: "center",
         height: windowHeight / 5.5,
         borderRadius: 30,
@@ -122,7 +152,7 @@ const styles = StyleSheet.create({
     },
     TwonumberBox: {
         width: windowWidth / 3.8,
-        height: 60,
+        height: 50,
         elevation: 2,
         borderWidth: 4,
         marginBottom: 3,
@@ -135,14 +165,12 @@ const styles = StyleSheet.create({
         borderColor: "#1D7874",
         justifyContent: "center",
     },
-    // twoNumberBox: {
-    //     width: 56,
-    //     height: 56,
-    //     elevation: 2,
-    //     marginBottom: 3,
-    //     backgroundColor: 'white',
-    //     borderBottomEndRadius: 15,
-    //     borderBottomStartRadius: 15,
-    // }
+    PowerButton: {
+        width: 56,
+        height: 56,
+        backgroundColor: '#6ABF10',
+        borderRadius: 30,
+
+    }
 });
 

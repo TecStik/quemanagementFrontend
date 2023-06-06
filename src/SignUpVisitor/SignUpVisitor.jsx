@@ -1,48 +1,63 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { Url } from "../../Core";
 import LinearGradient from 'react-native-linear-gradient'
-import StoreContext from "../../GlobalState/GlobalState";
 import Header from "../Header/Header";
+import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
-
+import { Url } from "../../Core";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function SignIn() {
-
+export default function SignUpVisitor() {
+    const [Name, setVistName] = useState("");
+    const [Email, setEmail] = useState("");
+    const [ContactNum, setContactNum] = useState("");
     const navigation = useNavigation();
-    const LoginUser = useContext(StoreContext);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    function loginHandler(params) {
-
-        // console.log(email, password);
+    const loginHandler = () => {
 
         axios({
             method: "post",
-            url: Url + "/auth/api/userLogin",
+            url: Url + "/api/visitor",
             data: {
-                Email: email,
-                Password: password
+                Name: Name,
+                Email: Email,
+                ContactNum: ContactNum
             }
         }).then((res) => {
 
-            // console.log(res.data, "Login Response");
-            navigation.navigate('Franchise')
-            LoginUser.setLoginUser(res.data)
+            AsyncStorage.setItem(
+                'Visitor',
+                JSON.stringify(res.data),
+                navigation.navigate('AdminHome')
+            );
+            _retrieveData()
 
+            // console.log(res.data, "====>Response");
         }).catch((err) => {
-            console.log(err, "Error");
-            // navigation.navigate('AdminHome')
+            console.log(err, "====>Error");
         })
+        // navigation.navigate('AdminHome')
     }
+
+
+    const _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('Visitor');
+            if (value !== null) {
+                // We have data!!
+                console.log(value,"get AsyncStorage Data");
+            }
+        } catch (error) {
+            // Error retrieving data
+        }
+    };
+
 
     return (
 
@@ -55,7 +70,7 @@ export default function SignIn() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Sign IN" />
+                <Header ScreenName="Visitor SignUp" />
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
@@ -70,7 +85,7 @@ export default function SignIn() {
                                     style={styles.TextInput}
                                     placeholder="Name"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(name) => setEmail(name)}
+                                    onChangeText={(Name) => setVistName(Name)}
                                 />
                             </View>
                             <View style={styles.inputView}>
@@ -78,22 +93,20 @@ export default function SignIn() {
                                     style={styles.TextInput}
                                     placeholder="Email"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(email) => setEmail(email)}
+                                    onChangeText={(Email) => setEmail(Email)}
                                 />
                             </View>
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Password"
+                                    placeholder="Contact Number"
                                     placeholderTextColor="#003f5c"
-                                    secureTextEntry={true}
-                                    onChangeText={(password) => setPassword(password)}
+                                    // secureTextEntry={true}
+                                    onChangeText={(ContactNum) => setContactNum(ContactNum)}
                                 />
                             </View>
-                            <TouchableOpacity>
-                                <Text style={styles.forgot_button}>Forgot Password?</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.loginBtn} onPress={loginHandler}>
+
+                            <TouchableOpacity style={styles.loginBtn} onPress={_retrieveData}>
                                 <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
                             </TouchableOpacity>
                         </View>
@@ -138,10 +151,6 @@ const styles = StyleSheet.create({
         fontSize: 22,
         padding: 10,
         // marginLeft: 20,
-    },
-    forgot_button: {
-        height: 30,
-        // marginBottom: 30,
     },
     loginBtn: {
         width: "40%",

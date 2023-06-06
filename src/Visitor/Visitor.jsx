@@ -6,37 +6,90 @@ import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import appointment from '../../assets/appointment.png';
 import appointmentCl from '../../assets/appointmentCl.png';
+import { useNavigation } from '@react-navigation/native';
 
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+import ModalScreen from "./Modal";
+import VisitorModal from "./VisitorModal";
+import axios from "axios";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
 export default function Visitor() {
 
+    const navigation = useNavigation();
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [ShowCamera, setShowCamera] = useState(false);
+    const [FranchiseData, setFranchiseData] = useState("");
+    const [QrValue, setQrValue] = useState("");
+
+    const handleClick = () => {
+        setShowCamera(true);
+
+    };
+
+    const handleClose = () => {
+        setShowPopup(false);
+    };
+
+    const handleQr = async (data) => {
+
+        setShowPopup(true);
+        setQrValue(data);
+        setShowCamera(false);
+
+        // console.log(data, "data from QR Scanner");
+        axios({
+            method: "post",
+            url: "https://que-management-server-sshkvhkhua-et.a.run.app/api/franchise/get",
+            data: {
+                filter: {
+                    _id: "647ef1911602ba4e992bbe9f"
+                }
+            }
+        }).then((res) => {
+            // console.log(res.data[0], "Franchise Data");
+            setFranchiseData(res.data[0])
+        }).catch((error) => {
+
+        })
+    };
+
+  
     return (
 
         <>
+
             <LinearGradient
                 colors={['#0F3C3A', '#1D7874', '#0F3C3A']}
                 style={{ flex: 1 }}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
             >
+                <Header ScreenName="Visitor Home" />
 
-                <Header ScreenName="Visitor Home"/>
+                <ModalScreen visible={ShowCamera} onClose={handleClose} handleQr={handleQr} />
+
+                <VisitorModal visible={showPopup} onClose={handleClose} FranchiseData={FranchiseData}/>
+
                 <ScrollView>
-                    <View style={{ marginTop: windowHeight/5, justifyContent: "center", alignItems: "center" }}>
+                    <View style={{ marginTop: windowHeight / 5, justifyContent: "center", alignItems: "center" }}>
 
-                        <View style={styles.container}>
+                        <TouchableOpacity style={styles.container} onPress={handleClick}>
                             <Image source={appointmentCl} style={{ width: windowWidth / 2, height: windowHeight / 4.5, }} />
                             <Text style={{ fontSize: 20, color: "white" }}>Take Appointment</Text>
-                        </View>
-                        <View style={styles.container}>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.container}>
                             <Image source={appointment} style={{ width: windowWidth / 2, height: windowHeight / 4.5, }} />
                             <Text style={{ fontSize: 20, color: "white" }}>Appointment List</Text>
 
-                        </View>
+                        </TouchableOpacity>
 
 
                         {/* <View style={styles.container}></View>

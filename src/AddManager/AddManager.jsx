@@ -1,24 +1,58 @@
 import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import DropDownPicker from 'react-native-dropdown-picker'
+import axios from "axios";
+import { Url } from "../../Core";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function AddManager() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [Name, setManName] = useState("");
+    const [Email, setEmail] = useState("");
+    const [ContactNum, setContactNum] = useState("");
+    const [LoginId, setLoginId] = useState("");
+    const [Password, setPassword] = useState("");
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Admin', value: 'Admin' },
-        { label: 'User', value: 'User' },
+        { label: 'Assistant ', value: 'Assistant ' },
+        { label: 'Manager', value: 'Manager' },
     ]);
+
+    // CraeteUser
+    // let body = {
+    //     Name: Name,
+    //     Email: Email,
+    //     ContactNum: ContactNum,
+    //     LoginId: LoginId,
+    //     Password: Password,
+    //     Role: value,
+    // }
+    function handler() {
+        axios({
+            method: "post",
+            url: Url + "/api/CraeteUser",
+            data: {
+                Name: Name,
+                Email: Email,
+                ContactNum: ContactNum,
+                LoginId: LoginId,
+                Password: Password,
+                Role: value,
+            }
+        }).then((res) => {
+            console.log(res.data, "Add Manager Response")
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }
 
     return (
 
@@ -44,23 +78,32 @@ export default function AddManager() {
                                     style={styles.TextInput}
                                     placeholder="Name"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(name) => setEmail(name)}
+                                    onChangeText={(Name) => setManName(Name)}
                                 />
                             </View>
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Email/ID"
+                                    placeholder="Email"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(name) => setEmail(name)}
+                                    onChangeText={(Email) => setEmail(Email)}
                                 />
                             </View>
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Phone"
+                                    placeholder="Contact Number"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(email) => setEmail(email)}
+                                    onChangeText={(ContactNum) => setContactNum(ContactNum)}
+                                />
+                            </View>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="Login Id"
+                                    placeholderTextColor="#003f5c"
+                                    // secureTextEntry={true}
+                                    onChangeText={(LoginId) => setLoginId(LoginId)}
                                 />
                             </View>
                             <View style={styles.inputView}>
@@ -69,16 +112,7 @@ export default function AddManager() {
                                     placeholder="Password"
                                     placeholderTextColor="#003f5c"
                                     secureTextEntry={true}
-                                    onChangeText={(password) => setPassword(password)}
-                                />
-                            </View>
-                            <View style={styles.inputView}>
-                                <TextInput
-                                    style={styles.TextInput}
-                                    placeholder="Re-Type Password"
-                                    placeholderTextColor="#003f5c"
-                                    secureTextEntry={true}
-                                    onChangeText={(password) => setPassword(password)}
+                                    onChangeText={(Password) => setPassword(Password)}
                                 />
                             </View>
                             <View >
@@ -90,14 +124,12 @@ export default function AddManager() {
                                     setValue={setValue}
                                     setItems={setItems}
                                     style={styles.inputView}
-
+                                    listMode="SCROLLVIEW"
                                 />
                             </View>
-                            <TouchableOpacity>
-                                {/* <Text style={styles.forgot_button}>Forgot Password?</Text> */}
-                            </TouchableOpacity>
+
                             <TouchableOpacity style={styles.loginBtn}>
-                                <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
+                                <Text style={{ fontSize: 30, color: "white" }} onPress={handler}>Next</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -1,17 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
+import axios from "axios";
+import { Url } from "../../Core";
+import StoreContext from "../../GlobalState/GlobalState";
+
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function Franchise() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+
+    const [Name, setFranName] = useState("");
+    const [ContctNum, setContctNum] = useState("");
+    const [ShortCode, setShortCode] = useState("");
+    const [Address, setAddress] = useState("");
+    const UserCredential = useContext(StoreContext);
+
+    let BelongToCredential = UserCredential.LoginUser[0]
+    // console.log(UserCredential.LoginUser[0]._id, "hhhhhhhhhhh");
+    // let body = {
+    //     Name: Name,
+    //     Address: Address,
+    //     ContactNum: ContctNum,
+    //     ShortCode: ShortCode
+    // }
+
+    function Handler() {
+        console.log(BelongToCredential._id);
+
+        // console.log(body);
+        axios({
+            method: "post",
+            url: Url + "/api/franchise",
+            data: {
+                Name: Name,
+                Status: "Close",
+                Address: Address,
+                ContactNum: ContctNum,
+                ShortCode: ShortCode,
+                BelongTo: BelongToCredential._id
+            }
+        }).then((res) => {
+            console.log(res.data, "Franchise Response");
+        }).catch(() => {
+            console.log(error);
+        })
+    }
+
     return (
 
         <>
@@ -23,7 +63,7 @@ export default function Franchise() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Franchise"/>
+                <Header ScreenName="Franchise" />
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
@@ -31,14 +71,13 @@ export default function Franchise() {
                         marginTop: windowHeight / 3.7
                     }}>
                         <View style={styles.container}>
-                            {/* <Image style={styles.image} source={require("./assets/log2.png")} />  */}
-                            {/* <StatusBar style="auto" /> */}
+
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
                                     placeholder="Name."
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(name) => setEmail(name)}
+                                    onChangeText={(Name) => setFranName(Name)}
                                 />
                             </View>
                             <View style={styles.inputView}>
@@ -46,20 +85,28 @@ export default function Franchise() {
                                     style={styles.TextInput}
                                     placeholder="Contact"
                                     placeholderTextColor="#003f5c"
-                                    onChangeText={(email) => setEmail(email)}
+                                    onChangeText={(ContctNum) => setContctNum(ContctNum)}
                                 />
                             </View>
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Location."
+                                    placeholder="Short Code"
                                     placeholderTextColor="#003f5c"
-                                    secureTextEntry={true}
-                                    onChangeText={(password) => setPassword(password)}
+                                    onChangeText={(ShortCode) => setShortCode(ShortCode)}
+                                />
+                            </View>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="Address."
+                                    placeholderTextColor="#003f5c"
+                                    // secureTextEntry={true}
+                                    onChangeText={(Address) => setAddress(Address)}
                                 />
                             </View>
                             <TouchableOpacity style={styles.loginBtn}>
-                                <Text style={{ fontSize: 30,color:"white" }}>Next</Text>
+                                <Text style={{ fontSize: 30, color: "white" }} onPress={Handler}>Next</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
