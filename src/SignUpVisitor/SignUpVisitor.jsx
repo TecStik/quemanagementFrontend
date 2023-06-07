@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";

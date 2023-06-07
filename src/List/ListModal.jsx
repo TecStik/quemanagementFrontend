@@ -14,73 +14,9 @@ const Colors = {
   Black: '#000000',
 };
 
-export default function VisitorModal({ visible, onClose, FranchiseData }) {
+export default function ListModal({ visible, onClose, data }) {
 
-  let [QrCodeData, setQrCodeData] = useState('')
-  const [visClose, setvisClose] = useState(false);
-
-  let Visitor = useContext(StoreContext).VisitorData
-
-  // console.log(FranchiseData, "Scan Franchise Data");
-
-  let body = {
-    FranchiseId: FranchiseData._id,
-    Name: Visitor.Name,
-    ContactNum: Visitor.ContactNum,
-    VisitorObjId: Visitor._id
-  }
-  function GetTokenHandler() {
-
-    console.log(body, "booody");
-    axios({
-      method: "post",
-      url: Url + "/api/token",
-      data: {
-        FranchiseId: FranchiseData._id,
-        Name: Visitor.Name,
-        ContactNum: Visitor.ContactNum,
-        VisitorObjId: Visitor._id
-      }
-    }).then((res) => {
-
-      console.log(res.data, "Get Token Response");
-
-      AsyncStorage.setItem(
-        'FranchiseId',
-        JSON.stringify(res.data),
-      );
-
-      Alert.alert('Alert Title', 'Token Create', [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ]);
-
-    }).catch((err) => {
-      console.log(err, "Error");
-    })
-  }
-
-  // useEffect(() => {
-  //   _retrieveData()
-  // }, [FranchiseData])
-
-  // const _retrieveData = async () => {
-  //   console.log("faiz e raza");
-  //   try {
-  //     const value = await AsyncStorage.getItem('Visitor');
-  //     if (value !== null) {
-  //       // We have data!!
-  //       console.log(value, "get AsyncStorage Data");
-  //     }
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(value, "not get AsyncStorage Data");
-  //   }
-  // };
+  console.log(data, "data");
 
   return (
     <View style={{ marginTop: 10 }}>
@@ -130,33 +66,34 @@ export default function VisitorModal({ visible, onClose, FranchiseData }) {
                   backgroundColor: '#6D9C9B',
                   borderRadius: 5,
                 }}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#6D9C9B", color: "white", fontWeight: "bold" }}>Telenor SHF </Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#6D9C9B", color: "white", fontWeight: "bold" }}>Attended</Text>
 
               </View>
 
               <View style={styles.num}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }}> Current No </Text>
-                <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#1D7874", color: "white", fontWeight: "bold" }} > {FranchiseData.CurrentToken} </Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }}> Name </Text>
+                {/* <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#1D7874", color: "white", fontWeight: "bold" }} >{data.Name} </Text> */}
               </View>
               <View style={styles.num}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >Last Issued </Text>
-                <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#1D7874", color: "white", fontWeight: "bold" }} > {FranchiseData.TokenNumber} </Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >{data.Name}</Text>
+                {/* <Text style={{ fontSize: 25, fontFamily: "20px", backgroundColor: "#1D7874", color: "white", fontWeight: "bold" }}> </Text> */}
               </View>
 
             </View>
 
             <View style={{ alignItems: "center", marginTop: 20 }}>
               <View style={styles.numCard}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }}>{Visitor.Name}</Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }}>Contact Number</Text>
               </View>
 
               <View style={styles.numCard}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >{Visitor.ContactNum}</Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >Muhammad {data.ContactNum} e Raza </Text>
               </View>
             </View>
 
 
             <View style={styles.buttonsContainer}>
+
               <TouchableOpacity
                 style={[
                   styles.buttonStyle,
@@ -168,8 +105,8 @@ export default function VisitorModal({ visible, onClose, FranchiseData }) {
                     marginLeft: 10,
                   },
                 ]}
-                onPress={GetTokenHandler}>
-                <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Get Token</Text>
+                onPress={onClose}>
+                <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Attend</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -184,7 +121,7 @@ export default function VisitorModal({ visible, onClose, FranchiseData }) {
                   },
                 ]}
                 onPress={onClose}>
-                <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Cancel</Text>
+                <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Discharge</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -35,31 +35,37 @@ export default function Visitor() {
     const handleClose = () => {
         setShowPopup(false);
     };
+    const handlemodalClose = () => {
+        setShowCamera(false);
+    };
 
     const handleQr = async (data) => {
+        // console.log(data, "data from QR Scanner");
 
         setShowPopup(true);
         setQrValue(data);
         setShowCamera(false);
 
-        // console.log(data, "data from QR Scanner");
+
+
         axios({
             method: "post",
             url: "https://que-management-server-sshkvhkhua-et.a.run.app/api/franchise/get",
             data: {
                 filter: {
-                    _id: "647ef1911602ba4e992bbe9f"
+                    _id: data
                 }
             }
         }).then((res) => {
             // console.log(res.data[0], "Franchise Data");
             setFranchiseData(res.data[0])
+            
         }).catch((error) => {
 
         })
     };
 
-  
+
     return (
 
         <>
@@ -72,9 +78,9 @@ export default function Visitor() {
             >
                 <Header ScreenName="Visitor Home" />
 
-                <ModalScreen visible={ShowCamera} onClose={handleClose} handleQr={handleQr} />
+                <ModalScreen visible={ShowCamera} onClose={handlemodalClose} handleQr={handleQr} />
 
-                <VisitorModal visible={showPopup} onClose={handleClose} FranchiseData={FranchiseData}/>
+                <VisitorModal visible={showPopup} onClose={handleClose} FranchiseData={FranchiseData} />
 
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 5, justifyContent: "center", alignItems: "center" }}>

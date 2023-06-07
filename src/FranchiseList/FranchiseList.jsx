@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Dimensions, FlatList, SafeAreaView, TouchableOpacity, ScrollView, Alert
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import { useNavigation } from '@react-navigation/native';
 import { Button, Box } from "native-base";
+import axios from "axios";
+import { Url } from "../../Core";
+import StoreContext from "../../GlobalState/GlobalState";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,6 +16,39 @@ const windowHeight = Dimensions.get('window').height;
 export default function FranchiseList() {
 
     const navigation = useNavigation();
+    let [FranchiseDta, setFranchiseData] = useState('')
+    let SelectFranchies = useContext(StoreContext)
+    // setSelectedFranchies
+    useEffect(() => {
+        axios({
+            method: "post",
+            url: Url + "/api/franchise/get",
+            data: {
+                "filter": {
+                }
+            }
+        }).then((res) => {
+            // console.log(res.data);
+            setFranchiseData(res.data)
+
+        }).catch(() => {
+            console.log(err, "error");
+        })
+    }, [])
+
+    const SelFranchHandler = (item) => {
+        console.log(item, "Selcet Franchise Data");
+        SelectFranchies.setSelectedFranchies(item)
+        Alert.alert('Alert Title', 'Select Franchies', [
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+            navigation.navigate('ManagerHome')
+        ]);
+    }
 
     return (
 
@@ -28,9 +64,28 @@ export default function FranchiseList() {
                 <Header />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 4.6 }}>
+                        <SafeAreaView>
+                            <FlatList
+                                data={FranchiseDta}
+                                renderItem={({ item }) =>
+                                    <TouchableOpacity onPress={(e) => SelFranchHandler(item)}>
+                                        <View style={styles.container} >
+                                            <Text style={{ fontSize: 20, color: "white" }}>{item.Name}</Text>
+                                            <Text style={{ fontSize: 25, color: "white", fontWeight: "bold" }}>{item.Address}</Text>
+                                            <Text style={{ fontSize: 23, color: "white" }}>Status: {" "}
+                                                <View style={styles.numberBox}>
+                                                    <Text style={{ fontSize: 15, color: "red", textAlign: "center", margin: 1 }}>{item.Status}</Text>
+                                                </View>
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                }
 
+                                keyExtractor={item => item.id}
+                            />
+                        </SafeAreaView>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+                        {/* <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
                             <View style={styles.container}>
                                 <Text style={{ fontSize: 20, color: "white" }}>Zong</Text>
                                 <Text style={{ fontSize: 25, color: "white", fontWeight: "bold" }}>Nursery</Text>
@@ -40,9 +95,11 @@ export default function FranchiseList() {
                                     </View>
                                 </Text>
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
-                        <TouchableOpacity>
+
+
+                        {/* <TouchableOpacity>
                             <View style={styles.container}>
                                 <Text style={{ fontSize: 20, color: "white" }}>Zong</Text>
                                 <Text style={{ fontSize: 25, color: "white", fontWeight: "bold" }}>Nursery</Text>
@@ -88,10 +145,9 @@ export default function FranchiseList() {
                                     </View>
                                 </Text>
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
-
-                        <View style={styles.container}></View>
+                        {/* <View style={styles.container}></View> */}
                         {/* <View style={styles.container}></View>
                         <View style={styles.container}></View> */}
                     </View>

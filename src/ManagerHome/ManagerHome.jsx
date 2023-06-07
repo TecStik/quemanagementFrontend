@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
-    StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, ScrollView, FlatList, SafeAreaView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
@@ -10,20 +10,46 @@ import ticke from '../../assets/MangerHome/ticke.png';
 import summary from '../../assets/MangerHome/summary.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+import { Url } from "../../Core";
+import moment from "moment";
+import StoreContext from "../../GlobalState/GlobalState";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 
 export default function ManagerHome() {
 
     const navigation = useNavigation();
     const [Power, setPower] = useState(false)
-
+    let SelctFranch = useContext(StoreContext).SelectedFranchies
+    let date = moment().format('l')
+    let time = moment().format('LT')
 
     const buttonHandler = () => {
         setPower(current => !current)
-        // console.log(Power)
+
+        axios({
+            method: "post",
+            url: Url + "/api/franchise/updateFiltered",
+            data: {
+                filter: {
+                    _id: SelctFranch._id
+                },
+                Update: {
+                    StartTime: time,
+                    Status: "Open",
+                    ActiveFranchiseId: date + "|_|" + SelctFranch._id
+                }
+            }
+        }).then((res) => {
+            console.log(res.data, "Respone Filter Update");
+        }).catch((err) => {
+            console.log(err);
+        })
     }
+
 
     return (
 
@@ -61,18 +87,19 @@ export default function ManagerHome() {
                             <View style={styles.PowerButton}>
                                 <TouchableOpacity onPress={buttonHandler}>
                                     {Power === false ?
-                                        <Icon name="power-off" size={40} style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            marginTop: 7
-                                        }} />
-                                        :
+
                                         <Icon name="power-off" size={40} style={{
                                             color: "white", textAlign: "center",
                                             height: 56,
                                             padding: 7,
                                             backgroundColor: 'red',
                                             borderRadius: 30,
+                                        }} />
+                                        :
+                                        <Icon name="power-off" size={40} style={{
+                                            color: "white",
+                                            textAlign: "center",
+                                            marginTop: 7
                                         }} />
                                     }
                                 </TouchableOpacity>

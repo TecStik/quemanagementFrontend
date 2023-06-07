@@ -21,7 +21,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function loginHandler(params) {
+    function loginHandler() {
 
         // console.log(email, password);
 
@@ -35,7 +35,7 @@ export default function SignIn() {
         }).then((res) => {
 
             // console.log(res.data, "Login Response");
-            navigation.navigate('Franchise')
+            navigation.navigate('AdminHome')
             LoginUser.setLoginUser(res.data)
 
         }).catch((err) => {

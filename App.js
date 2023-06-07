@@ -25,9 +25,20 @@ import SignUpVisitor from './src/SignUpVisitor/SignUpVisitor';
 function App() {
 
   const [LoginUser, setLoginUser] = useState("")
+  const [SelectedFranchies, setSelectedFranchies] = useState("")
+  const [VisitorData, setVisitorData] = useState({
+    Name: "Faiz",
+    email: "faizeraza2468@gmail.com",
+    ContactNum: "03022639133",
+    _id: "64801b6c8408de3d"
+  })
 
   return (
-    <StoreProvider value={{ LoginUser, setLoginUser }}>
+    <StoreProvider value={{
+      LoginUser, setLoginUser,
+      VisitorData, setVisitorData,
+      SelectedFranchies, setSelectedFranchies
+    }}>
       <NavigationContainer options={{ headerShown: false }}>
         <NativeBaseProvider>
           <AuthNavigator />

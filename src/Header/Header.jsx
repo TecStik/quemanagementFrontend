@@ -9,7 +9,7 @@ import { NativeBaseProvider } from "native-base";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function Header({ ScreenName }) {
+function Header({ ScreenName, FNSHeader, SNSHeader }) {
     return (
         <View style={{ position: 'absolute', left: 0, right: 0, zIndex: 1 }}>
             <View style={styles.Topheader}>
@@ -22,10 +22,12 @@ function Header({ ScreenName }) {
                 </TouchableOpacity>
             </View>
             <View style={{
-                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "85%", borderColor: "yellow",
+                backgroundColor: "#1D7874", opacity: 0.5, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: "70%", borderColor: "yellow",
                 borderBottomWidth: 5,
+                display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around"
             }}>
-                <Text>Second Header</Text>
+                <Text style={{ fontSize: 20, color: "white" }}>{FNSHeader}</Text>
+                <Text style={{ fontSize: 20, color: "white" }}>{SNSHeader}</Text>
             </View>
         </View>
     )

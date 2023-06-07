@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Modal, Text, Dimensions, TouchableHighlight, View, Alert, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {  useState, useEffect } from 'react';
+import { Modal, Text, Dimensions, View, Alert, TouchableOpacity, StyleSheet } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
