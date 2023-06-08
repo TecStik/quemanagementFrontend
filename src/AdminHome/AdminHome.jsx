@@ -25,13 +25,13 @@ export default function AdminHome() {
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
             >
-                <Header ScreenName="Admin Home" />
+                <Header ScreenName="Admin Home" FNSHeader="Welcom Faiz e Raza" />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 5 }}>
 
                         <View style={styles.container}>
                             <Image source={franchise} style={{ width: "25%", height: windowHeight / 8.5 }} />
-                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Franchise')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Create franchies</Text>
                                 </View>
@@ -47,7 +47,7 @@ export default function AdminHome() {
                         </View>
                         <View style={styles.container}>
                             <Image source={manager2} style={{ width: "25%", height: windowHeight / 8.5 }} />
-                            <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('ManagerAssign')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Assign Manager</Text>
                                 </View>
@@ -61,7 +61,7 @@ export default function AdminHome() {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.container}></View>
+                        {/* <View stylFe={styles.container}></View> */}
                     </View>
                 </ScrollView>
             </LinearGradient>

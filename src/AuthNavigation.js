@@ -15,6 +15,8 @@ import FranchiseList from './FranchiseList/FranchiseList';
 import AddManager from './AddManager/AddManager';
 import SignUpVisitor from './SignUpVisitor/SignUpVisitor';
 import Visitor from './Visitor/Visitor';
+import ManagerAssign from './ManagerAssign/ManagerAssign';
+
 // import QrCodeScanner from './QrCodeScanner/QrCodeScanner';
 
 
@@ -92,6 +94,11 @@ const AuthNavigator = () => {
         name="FranchiseList"
         options={{ headerShown: false }}
         component={FranchiseList}
+      />
+      <Stack.Screen
+        name="ManagerAssign"
+        options={{ headerShown: false }}
+        component={ManagerAssign}
       />
       {/* <Stack.Screen
         name="QrCodeScanner"

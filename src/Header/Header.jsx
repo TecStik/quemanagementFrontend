@@ -4,16 +4,27 @@ import LinearGradient from 'react-native-linear-gradient'
 import home from '../../assets/header-icon/home.png';
 import back from '../../assets/header-icon/back.png';
 import { NativeBaseProvider } from "native-base";
-
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function Header({ ScreenName, FNSHeader, SNSHeader }) {
+
+    const navigation = useNavigation();
+    const route = useRoute();
+
+    const handleBack = () => {
+        // console.log("in arowpress", navigation, route.name);
+        if (navigation.canGoBack()) {
+            navigation.goBack();
+        }
+
+    }
     return (
         <View style={{ position: 'absolute', left: 0, right: 0, zIndex: 1 }}>
             <View style={styles.Topheader}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => handleBack()}>
                     <Image style={styles.image} source={back} />
                 </TouchableOpacity>
                 <Text style={{ color: "white", fontSize: 30, marginLeft: "4%", marginTop: "2%", fontWeight: "bold" }}>{ScreenName}</Text>

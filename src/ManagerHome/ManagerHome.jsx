@@ -28,28 +28,51 @@ export default function ManagerHome() {
     let time = moment().format('LT')
 
     const buttonHandler = () => {
-        setPower(current => !current)
-
-        axios({
-            method: "post",
-            url: Url + "/api/franchise/updateFiltered",
-            data: {
-                filter: {
-                    _id: SelctFranch._id
-                },
-                Update: {
-                    StartTime: time,
-                    Status: "Open",
-                    ActiveFranchiseId: date + "|_|" + SelctFranch._id
+        // console.log(SelctFranch, "SelctFranch")
+        if (Power === false) {
+            axios({
+                method: "post",
+                url: Url + "/api/franchise/updateFiltered",
+                data: {
+                    filter: {
+                        _id: SelctFranch._id
+                    },
+                    Update: {
+                        StartTime: time,
+                        Status: "Open",
+                        ActiveFranchiseId: date + "|_|" + SelctFranch._id
+                    }
                 }
-            }
-        }).then((res) => {
-            console.log(res.data, "Respone Filter Update");
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+            }).then((res) => {
+                setPower(current => !current)
+                console.log(res.data, "Respone Filter Update");
+            }).catch((err) => {
+                console.log(err);
+            })
+        } else {
 
+            axios({
+                method: "post",
+                url: Url + "/api/franchise/updateFiltered",
+                data: {
+                    filter: {
+                        _id: SelctFranch._id
+                    },
+                    Update: {
+                        StartTime: time,
+                        Status: "Close",
+                        ActiveFranchiseId: date + "|_|" + SelctFranch._id
+                    }
+                }
+            }).then((res) => {
+                setPower(current => !current)
+                console.log(res.data, "Respone Filter Update");
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+
+    }
 
     return (
 
@@ -61,7 +84,7 @@ export default function ManagerHome() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Manager Home" />
+                <Header ScreenName="Manager Home" FNSHeader="Welcom Faiz e Raza" />
 
 
                 <ScrollView>
@@ -75,11 +98,11 @@ export default function ManagerHome() {
                             <View style={{}}>
                                 <View style={styles.TwonumberBox}>
                                     <ScrollView>
-                                        <Text style={{ fontSize: 20, color: "red", textAlign: "center" }}>Zong <Text style={{ fontSize: 15 }}>ABCD</Text></Text>
+                                        <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 4 }}>{SelctFranch.ShortCode}</Text>
                                     </ScrollView>
                                 </View>
                                 <View style={styles.TwonumberBox}>
-                                    <Text style={{ fontSize: 20, color: "red", textAlign: "center" }}>88</Text>
+                                    <Text style={{ fontSize: 25, color: "red", textAlign: "center" }}>{SelctFranch.CurrentToken}</Text>
                                     {/* <Text style={{ fontSize: 15, color: "black", width: windowWidth }}>Current No</Text> */}
                                 </View>
 
@@ -116,7 +139,7 @@ export default function ManagerHome() {
                         </View>
                         <View style={styles.container}>
                             <Image source={franchise} style={{ width: "28%", height: windowHeight / 8 }} />
-                            <TouchableOpacity onPress={() => navigation.navigate('List')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('FranchiseList')}>
                                 <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "red", textAlign: "center", }}>Select Franchise</Text>
                                 </View>
@@ -138,7 +161,7 @@ export default function ManagerHome() {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.container}></View>
+                        {/* <View style={styles.container}></View> */}
                     </View>
                 </ScrollView>
             </LinearGradient>

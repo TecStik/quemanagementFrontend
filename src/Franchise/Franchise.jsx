@@ -22,7 +22,7 @@ export default function Franchise() {
     const UserCredential = useContext(StoreContext);
 
     let BelongToCredential = UserCredential.LoginUser[0]
-    // console.log(UserCredential.LoginUser[0]._id, "hhhhhhhhhhh");
+    console.log(UserCredential.LoginUser[0]._id, "Context User Object Id");
     // let body = {
     //     Name: Name,
     //     Address: Address,
@@ -63,7 +63,7 @@ export default function Franchise() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Franchise" />
+                <Header ScreenName="Create Franchise" />
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",

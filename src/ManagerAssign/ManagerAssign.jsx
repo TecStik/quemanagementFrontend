@@ -9,46 +9,65 @@ import { Button, Box } from "native-base";
 import axios from "axios";
 import { Url } from "../../Core";
 import StoreContext from "../../GlobalState/GlobalState";
+import ManagerModal from "./ManagerModal";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function FranchiseList() {
+export default function ManagerAssign() {
 
     const navigation = useNavigation();
     let [FranchiseDta, setFranchiseData] = useState('')
+    let [showPopup, setShowPopup] = useState(false);
+    let [ModalData, setModalData] = useState('');
+
     let SelectFranchies = useContext(StoreContext)
+    const handleClick = () => { setShowPopup(true) };
+    const handleClose = () => { setShowPopup(false) };
+
+    // console.log(SelectFranchies.LoginUser.CraetedBy, "SelectFranchies");
     // setSelectedFranchies
+
+
     useEffect(() => {
         axios({
             method: "post",
             url: Url + "/api/franchise/get",
             data: {
-                "filter": {
+                filter: {
+                    BelongTo: "648199d2ec7bad4ad7ef7086"
                 }
             }
         }).then((res) => {
-            // console.log(res.data);
             setFranchiseData(res.data)
-
+            // console.log(res.data,"Franchise Response");
         }).catch(() => {
             console.log(err, "error");
         })
     }, [])
 
-    const SelFranchHandler = (item) => {
-        console.log(item, "Selcet Franchise Data");
-        SelectFranchies.setSelectedFranchies(item)
-        Alert.alert('Alert Title', 'Select Franchies', [
-            {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-            },
-            { text: 'OK', onPress: () => console.log('OK Pressed') },
-            // navigation.navigate('ManagerHome')
-            navigation.goBack()
-        ]);
+
+    const SelectManager = (item) => {
+        console.log(item.BelongTo);
+        axios({
+            method: "post",
+            url: Url + "/api/user/get",
+            data: {
+                "filter": {
+                    "CraetedBy": "648199d2ec7bad4ad7ef7086"
+                }
+            }
+        }).then((res) => {
+            console.log(res.data, "Response Manager");
+            setModalData(item)
+            setShowPopup(true)
+        }).catch(() => {
+            console.log(err, "error");
+        })
+    }
+
+    const ManagerUpdate = async (data) => {
+        console.log(data, "manager Update Data");
     }
 
     return (
@@ -63,19 +82,22 @@ export default function FranchiseList() {
             >
 
                 <Header />
+                <ManagerModal visible={showPopup} onClose={handleClose} data={ModalData} ManagerUpdate={ManagerUpdate(data)} />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 4.6 }}>
                         <SafeAreaView>
                             <FlatList
                                 data={FranchiseDta}
                                 renderItem={({ item }) =>
-                                    <TouchableOpacity onPress={(e) => SelFranchHandler(item)}>
+                                    <TouchableOpacity onPress={(e) => SelectManager(item)}>
                                         <View style={styles.container} >
-                                            <Text style={{ fontSize: 20, color: "white" }}>{item.Name}</Text>
-                                            <Text style={{ fontSize: 25, color: "white", fontWeight: "bold" }}>{item.Address}</Text>
-                                            <Text style={{ fontSize: 23, color: "white" }}>Status: {" "}
+                                            <Text style={{ fontSize: 20, color: "white" }}><Text>Franchise Name: </Text>  {item.Name}</Text>
+                                            <Text style={{ fontSize: 20, color: "white" }}><Text>Manager Name: </Text> {item.ManagerName}</Text>
+                                            <Text style={{ fontSize: 20, color: "white" }}><Text>Contact Number: </Text> {item.ContactNum}</Text>
+                                            <Text style={{ fontSize: 20, color: "white" }}><Text>Address: </Text> {item.Address}</Text>
+                                            <Text style={{ fontSize: 20, color: "white" }}>Short Code: {" "}
                                                 <View style={styles.numberBox}>
-                                                    <Text style={{ fontSize: 15, color: "red", textAlign: "center", margin: 1 }}>{item.Status}</Text>
+                                                    <Text style={{ fontSize: 15, color: "white", textAlign: "center", margin: 1 }}>{item.ShortCode}</Text>
                                                 </View>
                                             </Text>
                                         </View>
@@ -163,8 +185,8 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         backgroundColor: "#679289",
         justifyContent: "center",
-        alignItems: "center",
-        height: windowHeight / 6,
+        // alignItems: "center",
+        height: windowHeight / 4,
         borderRadius: 30,
         marginTop: "4%",
         borderColor: "#1D7874",
@@ -180,7 +202,7 @@ const styles = StyleSheet.create({
         elevation: 2,
         borderRadius: 28,
         // marginBottom: 3,
-        backgroundColor: 'black',
+        backgroundColor: 'green',
         // margin: 10,
     },
     twoNumberBox: {
