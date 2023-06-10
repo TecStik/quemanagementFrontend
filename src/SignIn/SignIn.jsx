@@ -29,8 +29,8 @@ export default function SignIn() {
             method: "post",
             url: Url + "/auth/api/userLogin",
             data: {
-                Email: "Raza@gmail.com",
-                Password: "1234"
+                Email: email,
+                Password: password
             }
         }).then((res) => {
 
