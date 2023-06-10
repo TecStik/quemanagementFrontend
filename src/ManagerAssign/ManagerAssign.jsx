@@ -19,7 +19,9 @@ export default function ManagerAssign() {
     const navigation = useNavigation();
     let [FranchiseDta, setFranchiseData] = useState('')
     let [showPopup, setShowPopup] = useState(false);
+    let [loading, setloading] = useState(false);
     let [ModalData, setModalData] = useState('');
+    let [AysnData, setAysnData] = useState('')
 
     let SelectFranchies = useContext(StoreContext)
     const handleClick = () => { setShowPopup(true) };
@@ -40,34 +42,56 @@ export default function ManagerAssign() {
             }
         }).then((res) => {
             setFranchiseData(res.data)
+            setloading(false)
             // console.log(res.data,"Franchise Response");
-        }).catch(() => {
-            console.log(err, "error");
+        }).catch((err) => {
+            console.log(err, "Franchise error");
         })
-    }, [])
+
+    }, [loading])
 
 
     const SelectManager = (item) => {
-        console.log(item.BelongTo);
+        // console.log(item);
+        // axios({
+        //     method: "post",
+        //     url: Url + "/api/user/get",
+        //     data: {
+        //         "filter": {
+        //             "CraetedBy": "648199d2ec7bad4ad7ef7086"
+        //         }
+        //     }
+        // }).then((res) => {
+        //     console.log(res.data, "Response Manager");
+        // }).catch(() => {
+        //     console.log(err, "error");
+        // })
+        setModalData(item)
+        setShowPopup(true)
+    }
+
+    const ManagerUpdate = async (data) => {
+        console.log(data.CraetedBy, "manager Update Data");
+        console.log(data.Name, "manager Update Data");
+
         axios({
             method: "post",
-            url: Url + "/api/user/get",
+            url: Url + "/api/franchise/updateFiltered",
             data: {
-                "filter": {
-                    "CraetedBy": "648199d2ec7bad4ad7ef7086"
+                filter: {
+                    BelongTo: data.CraetedBy
+                },
+                Update: {
+                    ManagerName: data.Name
                 }
             }
         }).then((res) => {
             console.log(res.data, "Response Manager");
-            setModalData(item)
-            setShowPopup(true)
+            setShowPopup(false)
+            setloading(true)
         }).catch(() => {
             console.log(err, "error");
         })
-    }
-
-    const ManagerUpdate = async (data) => {
-        console.log(data, "manager Update Data");
     }
 
     return (
@@ -82,7 +106,7 @@ export default function ManagerAssign() {
             >
 
                 <Header />
-                <ManagerModal visible={showPopup} onClose={handleClose} data={ModalData} ManagerUpdate={ManagerUpdate(data)} />
+                <ManagerModal visible={showPopup} onClose={handleClose} data={ModalData} ManagerUpdate={ManagerUpdate} />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 4.6 }}>
                         <SafeAreaView>

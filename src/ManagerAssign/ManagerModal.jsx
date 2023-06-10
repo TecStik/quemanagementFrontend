@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Modal, Text, Dimensions, View, Alert, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { Modal, Text, Dimensions, View, Alert, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StoreContext from '../../GlobalState/GlobalState';
 import axios from 'axios';
@@ -17,11 +17,27 @@ const Colors = {
 
 export default function ManagerModal({ visible, onClose, data, ManagerUpdate }) {
 
-  console.log(data, "data");
-
+  console.log(data, "Modal data");
+  let [UserData, setUserData] = useState('')
   // const UpdateManager = (item) => {
   //   console.log(item, "Update Manager Data");
   // }
+  useEffect(() => {
+    axios({
+      method: "post",
+      url: Url + "/api/user/get",
+      data: {
+        filter: {
+          CraetedBy: data.BelongTo
+        }
+      }
+    }).then((res) => {
+      setUserData(res.data)
+      // console.log(res.data, "Response User Data");
+    }).catch((err) => {
+      console.log(err, "User Error");
+    })
+  }, [data])
 
   return (
     <View style={{ marginTop: 10 }}>
@@ -61,13 +77,14 @@ export default function ManagerModal({ visible, onClose, data, ManagerUpdate }) 
             <View />
 
             <View style={{ alignItems: 'center' }}>
+
               <SafeAreaView>
                 <FlatList
-                  data={data}
+                  data={UserData}
                   renderItem={({ item }) =>
                     <TouchableOpacity onPress={() => ManagerUpdate(item)}>
                       <View style={styles.manCard}>
-                        <Text style={{ fontSize: 25, fontFamily: "20px", color: "#6D9C9B", fontWeight: "bold", }}>Attended</Text>
+                        <Text style={{ fontSize: 25, fontFamily: "20px", color: "#6D9C9B", fontWeight: "bold", }}>{item.Name}</Text>
                       </View>
                     </TouchableOpacity>
                   } />
