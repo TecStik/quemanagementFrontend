@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
@@ -8,14 +8,17 @@ import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import { Url } from "../../Core";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import StoreContext from "../../GlobalState/GlobalState";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function SignUpVisitor() {
-    const [Name, setVistName] = useState("");
     const [Email, setEmail] = useState("");
+    const [Name, setVistName] = useState("");
     const [ContactNum, setContactNum] = useState("");
+    const [AysnVistorData, setAysnVistorData] = useState("");
+    let visitorDta = useContext(StoreContext)
     const navigation = useNavigation();
 
 
@@ -34,30 +37,38 @@ export default function SignUpVisitor() {
             AsyncStorage.setItem(
                 'Visitor',
                 JSON.stringify(res.data),
-                navigation.navigate('AdminHome')
+                navigation.navigate('Visitor')
             );
-            _retrieveData()
-
-            // console.log(res.data, "====>Response");
+            visitorDta.setVisitorData(res.data)
+            console.log(res.data, "====>Response");
         }).catch((err) => {
             console.log(err, "====>Error");
         })
         // navigation.navigate('AdminHome')
     }
 
+    useEffect(() => {
+        _retrieveData()
+    }, [])
 
-    const _retrieveData = async () => {
+
+    async function _retrieveData() {
         try {
             const value = await AsyncStorage.getItem('Visitor');
+
             if (value !== null) {
                 // We have data!!
-                console.log(value,"get AsyncStorage Data");
+                setAysnVistorData(JSON.parse(value))
+
+                console.log(visitorDta.VisitorData, "get  visitorDta.setVisitorData Data");
             }
         } catch (error) {
             // Error retrieving data
+            console.log(error, "get AsyncStorage Data Error");
         }
-    };
+    }
 
+    console.log(AysnVistorData, "get AysnVistorData Data");
 
     return (
 
@@ -106,10 +117,17 @@ export default function SignUpVisitor() {
                                 />
                             </View>
 
-                            <TouchableOpacity style={styles.loginBtn} onPress={_retrieveData}>
-                                <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
+                            <TouchableOpacity style={styles.loginBtn} onPress={loginHandler}>
+                                <Text style={{ fontSize: 22, color: "white" }}>Next</Text>
                             </TouchableOpacity>
                         </View>
+
+                        <TouchableOpacity style={styles.VisitorBtn} onPress={() => navigation.navigate('Visitor')}>
+                            <Text style={{
+                                fontSize: 22, color: "white", margin: 5,
+                            }}>Continue as Faiz e {AysnVistorData.Name}</Text>
+                        </TouchableOpacity>
+
                     </View>
                 </ScrollView>
             </LinearGradient>
@@ -138,12 +156,13 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         width: "85%",
         height: 50,
-        marginBottom: 25,
+
         alignItems: "center",
         borderColor: "#1D7874",
         borderWidth: 5,
         height: 60,
-        // marginTop: "2%",
+        margin: "2%",
+        // padding: '2%'
     },
     TextInput: {
         flex: 1,
@@ -154,11 +173,23 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         width: "40%",
-        borderRadius: 25,
         height: 50,
+        borderRadius: 25,
         alignItems: "center",
         justifyContent: "center",
-        // marginTop: 40,
         backgroundColor: "#00CBA0",
+        // marginTop: 40,
     },
+    VisitorBtn: {
+        backgroundColor: "#00CBA0",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 25,
+        minHeight: 50,
+        padding: 5,
+        margin: 5,
+        // minHeight
+        // marginLeft: 5,
+        // marginRight: 5,
+    }
 });

@@ -24,7 +24,7 @@ export default function List() {
 
     console.log(franchiseData, "franchiseData");
 
-    const handleClick = () => { setShowPopup(true) };
+    const handleClick = async () => { setShowPopup(false) };
     const handleClose = () => { setShowPopup(false) };
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function List() {
                 }
             }
         }).then((res) => {
-            // console.log(res.data, "Response Token Data");
+            console.log(res.data, "Response Token Data");
             setTokenData(res.data)
         }).catch((err) => {
             console.log(err);
@@ -59,7 +59,7 @@ export default function List() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="List" FNSHeader="Current Token" SNSHeader="Total Token" />
+                <Header ScreenName="Appointment List" FNSHeader="Current Token" SNSHeader="Total Token" />
                 <ScrollView>
                     <View style={{ marginTop: windowHeight / 5.5 }}>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
@@ -80,7 +80,7 @@ export default function List() {
                                             <Text style={{ fontSize: 25, color: "white" }}>{item.Name}</Text>
                                             <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
                                                 <View style={styles.numberBox}>
-                                                    <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>04</Text>
+                                                    <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>{item.TokenNumber}</Text>
                                                 </View>
                                             </View>
                                         </View>

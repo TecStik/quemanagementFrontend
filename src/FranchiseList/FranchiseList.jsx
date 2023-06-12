@@ -16,7 +16,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function FranchiseList() {
 
     const navigation = useNavigation();
-    let [FranchiseDta, setFranchiseData] = useState('')
+    let [FranchiseData, setFranchiseData] = useState('')
     let SelectFranchies = useContext(StoreContext)
     // setSelectedFranchies
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function FranchiseList() {
                     <View style={{ marginTop: windowHeight / 4.6 }}>
                         <SafeAreaView>
                             <FlatList
-                                data={FranchiseDta}
+                                data={FranchiseData}
                                 renderItem={({ item }) =>
                                     <TouchableOpacity onPress={(e) => SelFranchHandler(item)}>
                                         <View style={styles.container} >

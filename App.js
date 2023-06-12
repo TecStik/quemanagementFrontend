@@ -10,7 +10,7 @@ import WelcomScreen from './src/WelcomScreen/WelcomScreen';
 import SignUP from './src/SignUP/SignUP';
 import List from './src/List/List';
 import AdminHome from './src/AdminHome/AdminHome';
-import Dashboard from './src/Dashboard/Dashboard';
+import Dashboard from './src/AppointmentList/AppointmentList';
 import ManagerHome from './src/ManagerHome/ManagerHome';
 import Registration from './src/Registration/Registration';
 import Franchise from './src/Franchise/Franchise';
@@ -24,19 +24,21 @@ import SignUpVisitor from './src/SignUpVisitor/SignUpVisitor';
 
 function App() {
 
-  const [LoginUser, setLoginUser] = useState("")
-  const [SelectedFranchies, setSelectedFranchies] = useState("")
-  const [VisitorData, setVisitorData] = useState({
-    Name: "Faiz",
-    email: "faizeraza2468@gmail.com",
-    ContactNum: "03022639133",
-    _id: "64801b6c8408de3d"
-  })
-
+  const [LoginUser, setLoginUser] = useState("");
+  let [AppointmentList, setAppointmentList] = useState('');
+  const [SelectedFranchies, setSelectedFranchies] = useState("");
+  const [VisitorData, setVisitorData] = useState('')
+  // {
+  //   Name: "Faiz",
+  //   email: "faizeraza2468@gmail.com",
+  //   ContactNum: "03022639133",
+  //   _id: "64801b6c8408de3d"
+  // }
   return (
     <StoreProvider value={{
       LoginUser, setLoginUser,
       VisitorData, setVisitorData,
+      AppointmentList, setAppointmentList,
       SelectedFranchies, setSelectedFranchies
     }}>
       <NavigationContainer options={{ headerShown: false }}>

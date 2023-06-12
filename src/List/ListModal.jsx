@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Url } from '../../Core';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import moment from "moment";
 
 const Colors = {
   Grey: '#DCDCDC',
@@ -17,6 +18,29 @@ const Colors = {
 export default function ListModal({ visible, onClose, data }) {
 
   console.log(data, "data");
+  let date = moment().format('l')
+  let time = moment().format('LT')
+
+  function HandlerUpdate(value) {
+    axios({
+      method: "post",
+      url: Url + '/api/UpdateToken',
+      data: {
+        "filter": {
+          "_id": data._id
+        },
+        "Update": {
+          "Status": value,
+          "AttendTime": time
+        }
+      }
+    }).then((res) => {
+      console.log(res.data);
+
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <View style={{ marginTop: 10 }}>
@@ -87,7 +111,7 @@ export default function ListModal({ visible, onClose, data }) {
               </View>
 
               <View style={styles.numCard}>
-                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >Muhammad {data.ContactNum} e Raza </Text>
+                <Text style={{ fontSize: 25, fontFamily: "20px", fontWeight: "bold" }} >{data.ContactNum}</Text>
               </View>
             </View>
 
@@ -105,7 +129,8 @@ export default function ListModal({ visible, onClose, data }) {
                     marginLeft: 10,
                   },
                 ]}
-                onPress={onClose}>
+
+                onPress={HandlerUpdate("Attend")}>
                 <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Attend</Text>
               </TouchableOpacity>
 
@@ -120,7 +145,7 @@ export default function ListModal({ visible, onClose, data }) {
                     marginLeft: 10,
                   },
                 ]}
-                onPress={onClose}>
+                onPress={HandlerUpdate("Discharge")}>
                 <Text style={{ textAlign: 'center', color: "white", fontSize: 20 }}>Discharge</Text>
               </TouchableOpacity>
             </View>

@@ -6,7 +6,7 @@ import SignUP from './SignUP/SignUP';
 import AdminHome from './AdminHome/AdminHome';
 import ManagerHome from './ManagerHome/ManagerHome';
 import List from './List/List';
-import Dashboard from './Dashboard/Dashboard';
+import AppointmentList from './AppointmentList/AppointmentList';
 import Registration from './Registration/Registration';
 import Franchise from './Franchise/Franchise';
 import WelcomScreen from './WelcomScreen/WelcomScreen';
@@ -66,9 +66,9 @@ const AuthNavigator = () => {
         component={List}
       />
       <Stack.Screen
-        name="Dashboard"
+        name="AppointmentList"
         options={{ headerShown: false }}
-        component={Dashboard}
+        component={AppointmentList}
       />
       <Stack.Screen
         name="Visitor"

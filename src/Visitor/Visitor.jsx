@@ -46,8 +46,6 @@ export default function Visitor() {
         setQrValue(data);
         setShowCamera(false);
 
-
-
         axios({
             method: "post",
             url: "https://que-management-server-sshkvhkhua-et.a.run.app/api/franchise/get",
@@ -59,7 +57,7 @@ export default function Visitor() {
         }).then((res) => {
             // console.log(res.data[0], "Franchise Data");
             setFranchiseData(res.data[0])
-            
+
         }).catch((error) => {
 
         })
@@ -86,15 +84,14 @@ export default function Visitor() {
                     <View style={{ marginTop: windowHeight / 5, justifyContent: "center", alignItems: "center" }}>
 
                         <TouchableOpacity style={styles.container} onPress={handleClick}>
-                            <Image source={appointmentCl} style={{ width: windowWidth / 2, height: windowHeight / 4.5, }} />
+                            <Image source={appointmentCl} style={{ width: windowWidth / 3, height: windowHeight / 5.5 }} />
                             <Text style={{ fontSize: 20, color: "white" }}>Take Appointment</Text>
                         </TouchableOpacity>
 
 
-                        <TouchableOpacity style={styles.container}>
-                            <Image source={appointment} style={{ width: windowWidth / 2, height: windowHeight / 4.5, }} />
+                        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('AppointmentList')}>
+                            <Image source={appointment} style={{ width: windowWidth / 3, height: windowHeight / 5.5, }} />
                             <Text style={{ fontSize: 20, color: "white" }}>Appointment List</Text>
-
                         </TouchableOpacity>
 
 

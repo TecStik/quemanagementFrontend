@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Text, Dimensions, View, Alert, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StoreContext from '../../GlobalState/GlobalState';
@@ -18,17 +18,40 @@ export default function VisitorModal({ visible, onClose, FranchiseData }) {
 
   let [QrCodeData, setQrCodeData] = useState('')
   const [visClose, setvisClose] = useState(false);
+  const [VistorData, setVistorData] = useState(false);
 
   let Visitor = useContext(StoreContext).VisitorData
 
+  // console.log(VistorData, "Scan Franchise Dataoooooooooooo");
   // console.log(FranchiseData, "Scan Franchise Data");
 
-  let body = {
-    FranchiseId: FranchiseData._id,
-    Name: Visitor.Name,
-    ContactNum: Visitor.ContactNum,
-    VisitorObjId: Visitor._id
+  // let body = {
+  //   FranchiseId: FranchiseData._id,
+  //   Name: Visitor.Name,
+  //   ContactNum: Visitor.ContactNum,
+  //   VisitorObjId: Visitor._id
+  // }
+
+
+  useEffect(() => {
+    _retrieveData()
+  }, [])
+
+  async function _retrieveData() {
+    try {
+      const value = await AsyncStorage.getItem('Visitor');
+
+      if (value !== null) {
+        // We have data!!
+        setVistorData(JSON.parse(value))
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error, "get AsyncStorage Data Error");
+    }
   }
+
+
   function GetTokenHandler() {
 
     console.log(body, "booody");
@@ -37,9 +60,9 @@ export default function VisitorModal({ visible, onClose, FranchiseData }) {
       url: Url + "/api/token",
       data: {
         FranchiseId: FranchiseData._id,
-        Name: Visitor.Name,
-        ContactNum: Visitor.ContactNum,
-        VisitorObjId: Visitor._id
+        Name: VistorData.Name,
+        ContactNum: VistorData.ContactNum,
+        VisitorObjId: VistorData._id
       }
     }).then((res) => {
 

@@ -57,7 +57,8 @@ export default function WelcomScreen() {
                                 </Box>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => navigation.navigate('Visitor')}>
+                            {/* <TouchableOpacity onPress={() => navigation.navigate('ManagerHome')}> */}
+                            <TouchableOpacity onPress={() => navigation.navigate('SignUpVisitor')}>
                                 <Box width="100%" bg="#FFFFFF" p="4" shadow={2} _text={{
                                     fontSize: "2xl",
                                     color: "#679289"
