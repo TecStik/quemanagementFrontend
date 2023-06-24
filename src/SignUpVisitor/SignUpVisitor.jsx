@@ -1,24 +1,28 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity,
+    ScrollView, Image
 } from "react-native";
-import LinearGradient from 'react-native-linear-gradient'
-import Header from "../Header/Header";
-import { useNavigation } from '@react-navigation/native';
-import axios from "axios";
-import { Url } from "../../Core";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LinearGradient from 'react-native-linear-gradient'
 import StoreContext from "../../GlobalState/GlobalState";
+import { useNavigation } from '@react-navigation/native';
+import logo from '../../assets/logo/logo1.png';
+import Header from "../Header/Header";
+import { Url } from "../../Core";
+import axios from "axios";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function SignUpVisitor() {
-    const [Email, setEmail] = useState("");
-    const [Name, setVistName] = useState("");
-    const [ContactNum, setContactNum] = useState("");
+
     const [AysnVistorData, setAysnVistorData] = useState("");
-    let visitorDta = useContext(StoreContext)
+    const [ContactNum, setContactNum] = useState("");
+    const [Name, setVistName] = useState("");
+    const [Email, setEmail] = useState("");
+
+    const visitorDta = useContext(StoreContext)
     const navigation = useNavigation();
 
 
@@ -82,11 +86,18 @@ export default function SignUpVisitor() {
             >
 
                 <Header ScreenName="Visitor SignUp" />
+                <View style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: windowHeight / 6
+                }}>
+                    <Image style={{ alignItems: "center", justifyContent: "center" }} source={logo} />
+                </View>
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: windowHeight / 3.7
+                        // marginTop: windowHeight / 3.7
                     }}>
                         <View style={styles.container}>
                             {/* <Image style={styles.image} source={require("./assets/log2.png")} />  */}
@@ -125,7 +136,7 @@ export default function SignUpVisitor() {
                         <TouchableOpacity style={styles.VisitorBtn} onPress={() => navigation.navigate('Visitor')}>
                             <Text style={{
                                 fontSize: 22, color: "white", margin: 5,
-                            }}>Continue as Faiz e {AysnVistorData.Name}</Text>
+                            }}>Continue as {AysnVistorData.Name}</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -136,16 +147,16 @@ export default function SignUpVisitor() {
 }
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: "#679289",
-        justifyContent: "center",
-        alignItems: "center",
-        height: windowHeight / 2,
-        width: windowWidth / 1.2,
-        borderRadius: 30,
-        // marginTop: "2%",
-        margin: 10,
-        padding: 10
+       // flex: 1,
+       width: windowWidth / 1.2,
+       backgroundColor: "#679289",
+       justifyContent: "center",
+       alignItems: "center",
+       marginBottom: "7%",
+       borderRadius: 30,
+       padding: 10,
+       // marginTop: "-0%",
+       // margin: 10,
     },
     image: {
         // marginTop:10,
@@ -153,23 +164,22 @@ const styles = StyleSheet.create({
     },
     inputView: {
         backgroundColor: "#FFFFFF",
+        borderColor: "#1D7874",
         borderRadius: 30,
+        borderWidth: 5,
         width: "85%",
         height: 50,
-
-        alignItems: "center",
-        borderColor: "#1D7874",
-        borderWidth: 5,
         height: 60,
         margin: "2%",
-        // padding: '2%'
+        // alignItems: "center",
+        // marginBottom: 25,
     },
     TextInput: {
         flex: 1,
         height: 50,
-        fontSize: 22,
         padding: 10,
-        // marginLeft: 20,
+        fontSize: 20,
+        marginLeft: 10,
     },
     loginBtn: {
         width: "40%",
@@ -184,10 +194,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#00CBA0",
         justifyContent: "center",
         alignItems: "center",
+        marginBottom: 10,
         borderRadius: 25,
         minHeight: 50,
         padding: 5,
-        margin: 5,
+        // margin: 5,
         // minHeight
         // marginLeft: 5,
         // marginRight: 5,

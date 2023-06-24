@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
-import Header from "../Header/Header";
-import axios from "axios";
-import { Url } from "../../Core";
 import StoreContext from "../../GlobalState/GlobalState";
+import Header from "../Header/Header";
+import { Url } from "../../Core";
+import axios from "axios";
+import logo from '../../assets/logo/logo1.png';
 
 
 
@@ -22,7 +23,7 @@ export default function Franchise() {
     const UserCredential = useContext(StoreContext);
 
     let BelongToCredential = UserCredential.LoginUser[0]
-    console.log(UserCredential.LoginUser[0]._id, "Context User Object Id");
+    // console.log(UserCredential.LoginUser[0]._id, "Context User Object Id");
     // let body = {
     //     Name: Name,
     //     Address: Address,
@@ -31,7 +32,7 @@ export default function Franchise() {
     // }
 
     function Handler() {
-        console.log(BelongToCredential._id);
+        // console.log(BelongToCredential._id);
 
         // console.log(body);
         axios({
@@ -64,14 +65,23 @@ export default function Franchise() {
             >
 
                 <Header ScreenName="Create Franchise" />
+
+                <View style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: windowHeight / 6
+                }}>
+                    <Image style={{ alignItems: "center", justifyContent: "center" }} source={logo} />
+                </View>
+
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: windowHeight / 3.7
+                        // marginTop: windowHeight / 3.7
                     }}>
-                        <View style={styles.container}>
 
+                        <View style={styles.container}>
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
@@ -118,15 +128,15 @@ export default function Franchise() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
+        width: windowWidth / 1.2,
         backgroundColor: "#679289",
         justifyContent: "center",
         alignItems: "center",
-        height: windowHeight / 2,
-        width: windowWidth / 1.2,
+        marginBottom: "7%",
         borderRadius: 30,
-        // marginTop: "20%",
-        // margin:10,
-        // padding:10
+        padding: 10,
+        // marginTop: "-0%",
+        // margin: 10,
     },
     image: {
         // marginTop:10,
@@ -134,14 +144,15 @@ const styles = StyleSheet.create({
     },
     inputView: {
         backgroundColor: "#FFFFFF",
+        borderColor: "#1D7874",
         borderRadius: 30,
+        borderWidth: 5,
         width: "85%",
         height: 50,
-        marginBottom: 25,
-        alignItems: "center",
-        borderColor: "#1D7874",
-        borderWidth: 5,
         height: 60,
+        margin: "2%",
+        // alignItems: "center",
+        // marginBottom: 25,
     },
     TextInput: {
         flex: 1,

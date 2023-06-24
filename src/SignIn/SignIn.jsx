@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
-    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView,Image
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Url } from "../../Core";
@@ -8,7 +8,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import StoreContext from "../../GlobalState/GlobalState";
 import Header from "../Header/Header";
 import axios from "axios";
-
+import logo from '../../assets/logo/logo1.png';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,6 +29,8 @@ export default function SignIn() {
             method: "post",
             url: Url + "/auth/api/userLogin",
             data: {
+                // Email: "test@gmail.com",
+                // Password: "1234"
                 Email: email,
                 Password: password
             }
@@ -56,11 +58,18 @@ export default function SignIn() {
             >
 
                 <Header ScreenName="Sign IN" />
+                <View style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: windowHeight / 6
+                }}>
+                    <Image style={{ alignItems: "center", justifyContent: "center" }} source={logo} />
+                </View>
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: windowHeight / 3.7
+                        // marginTop: windowHeight / 3.7
                     }}>
                         <View style={styles.container}>
                             {/* <Image style={styles.image} source={require("./assets/log2.png")} />  */}
@@ -106,15 +115,16 @@ export default function SignIn() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
+        width: windowWidth / 1.2,
         backgroundColor: "#679289",
         justifyContent: "center",
         alignItems: "center",
-        height: windowHeight / 2,
-        width: windowWidth / 1.2,
+        marginBottom: "7%",
         borderRadius: 30,
-        // marginTop: "2%",
-        margin: 10,
-        padding: 10
+        padding: 10,
+        // height: windowHeight / 2,
+        // marginTop: "-0%",
+        // margin: 10,
     },
     image: {
         // marginTop:10,
@@ -122,22 +132,22 @@ const styles = StyleSheet.create({
     },
     inputView: {
         backgroundColor: "#FFFFFF",
+        borderColor: "#1D7874",
         borderRadius: 30,
+        borderWidth: 5,
         width: "85%",
         height: 50,
-        marginBottom: 25,
-        alignItems: "center",
-        borderColor: "#1D7874",
-        borderWidth: 5,
         height: 60,
-        // marginTop: "2%",
+        margin: "2%",
+        // alignItems: "center",
+        // marginBottom: 25,
     },
     TextInput: {
         flex: 1,
         height: 50,
-        fontSize: 22,
         padding: 10,
-        // marginLeft: 20,
+        fontSize: 20,
+        marginLeft: 10,
     },
     forgot_button: {
         height: 30,

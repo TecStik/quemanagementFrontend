@@ -39,16 +39,16 @@ export default function AppointmentListView({ item }) {
                     <View style={styles.container}>
                         <View>
                             <Text style={{ fontSize: 25, color: "black" }}>{FranchiseData[0].Name}</Text>
-                            {/* <Text style={{ fontSize: 25, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text> */}
+                            {/* <Text style={{ fontSize: 20, color: "black" }}>10:00am <Text style={{ fontSize: 15 }}>Expected</Text></Text> */}
                         </View>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
                             <View style={styles.numberBox}>
-                                <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>{item.TokenNumber}</Text>
-                                <Text style={{ fontSize: 15, color: "black", marginTop: 15, width: windowWidth }}>Ticket No</Text>
+                                <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: 10 }}>{item.TokenNumber}</Text>
+                                <Text style={{ fontSize: 15, color: "black", marginTop: 13, width: windowWidth, margin: -7, padding: -5 }}>Ticket No</Text>
                             </View>
                             <View style={styles.numberBox}>
-                                <Text style={{ fontSize: 25, color: "red", textAlign: "center", marginTop: 10 }}>{FranchiseData[0].TokenNumber}</Text>
-                                <Text style={{ fontSize: 15, color: "black", marginTop: 15, width: windowWidth }}>Current No</Text>
+                                <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: 10 }}>{FranchiseData[0].TokenNumber}</Text>
+                                <Text style={{ fontSize: 15, color: "black", marginTop: 13, width: windowWidth, margin: -7, padding: -5 }}>Current No</Text>
                             </View>
                         </View>
                     </View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         height: windowHeight / 7,
         borderRadius: 30,
         marginTop: "4%",
-        borderColor: "#1D7874",
+        borderColor: "#679289",
         borderWidth: 5,
         // width: windowWidth - 6,
         margin: 10,

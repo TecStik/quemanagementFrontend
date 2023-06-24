@@ -65,7 +65,7 @@ export default function AddManager() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="AddManager" />
+                <Header ScreenName="Add Member" />
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
@@ -141,31 +141,34 @@ export default function AddManager() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
+        width: windowWidth / 1.2,
         backgroundColor: "#679289",
         justifyContent: "center",
         alignItems: "center",
-        // height: windowHeight / 2,
-        width: windowWidth / 1.2,
+        marginBottom: "7%",
         borderRadius: 30,
-        // marginTop: "20%",
-        margin: 10,
-        padding: 10
+        padding: 10,
+        // marginTop: "-0%",
+        // margin: 10,
     },
     inputView: {
         backgroundColor: "#FFFFFF",
-        borderRadius: 30,
-        width: windowWidth / 1.3,
-        marginBottom: 17,
-        alignItems: "center",
-        height: 60,
         borderColor: "#1D7874",
-        borderWidth: 5
+        borderRadius: 30,
+        borderWidth: 5,
+        width: "85%",
+        height: 50,
+        height: 60,
+        margin: "2%",
+        // alignItems: "center",
+        // marginBottom: 25,
     },
     TextInput: {
-        height: 50,
         flex: 1,
-        // padding: 10,
-        fontSize: 22
+        height: 50,
+        padding: 10,
+        fontSize: 20,
+        marginLeft: 10,
     },
     loginBtn: {
         width: "40%",

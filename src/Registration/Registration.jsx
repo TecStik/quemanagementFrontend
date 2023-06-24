@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Center, Dimensions, TouchableOpacity, ScrollView
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
 import axios from "axios";
 import { Url } from "../../Core";
 
+import logo from '../../assets/logo/logo1.png';
+import back from '../../assets/header-icon/back.png';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -47,13 +49,21 @@ export default function Registration() {
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
             >
-
                 <Header ScreenName="Registration" />
+                
+                <View style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: windowHeight / 6
+                }}>
+                    <Image style={{ alignItems: "center", justifyContent: "center" }} source={logo} />
+                </View>
+
                 <ScrollView >
                     <View style={{
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: windowHeight / 3.7
+                        // marginTop: windowHeight / 3.7
                     }}>
                         <View style={styles.container}>
                             <View style={styles.inputView}>
@@ -97,12 +107,14 @@ export default function Registration() {
                                     onChangeText={(Password) => setPassword(Password)}
                                 />
                             </View>
-                            <TouchableOpacity>
-                                {/* <Text style={styles.forgot_button}>Forgot Password?</Text> */}
-                            </TouchableOpacity>
+                            {/* <TouchableOpacity>
+                                <Text style={styles.forgot_button}>Forgot Password?</Text>
+                            </TouchableOpacity> */}
+
                             <TouchableOpacity style={styles.loginBtn} onPress={RigesterHandler}>
                                 <Text style={{ fontSize: 30, color: "white" }}>Next</Text>
                             </TouchableOpacity>
+
                         </View>
                     </View>
                 </ScrollView>
@@ -113,15 +125,16 @@ export default function Registration() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
+        width: windowWidth / 1.2,
         backgroundColor: "#679289",
         justifyContent: "center",
         alignItems: "center",
-        // height: windowHeight / 2,
-        width: windowWidth / 1.2,
+        marginBottom: "7%",
         borderRadius: 30,
-        // marginTop: "20%",
-        // margin:10,
-        padding: 10
+        padding: 10,
+        // height: windowHeight / 2,
+        // marginTop: "-0%",
+        // margin: 10,
     },
     image: {
         // marginTop:10,
@@ -129,32 +142,35 @@ const styles = StyleSheet.create({
     },
     inputView: {
         backgroundColor: "#FFFFFF",
-        borderRadius: 30,
-        width: "85%",
-        marginBottom: 17,
-        alignItems: "center",
         borderColor: "#1D7874",
+        borderRadius: 30,
+        borderWidth: 5,
+        width: "85%",
+        height: 50,
         height: 60,
-        borderWidth: 5
+        margin: "2%",
+        // alignItems: "center",
+        // marginBottom: 25,
     },
     TextInput: {
-        height: 50,
         flex: 1,
+        height: 50,
         padding: 10,
-        // marginLeft: 20,
-        fontSize: 22
+        fontSize: 20,
+        marginLeft: 10,
     },
     forgot_button: {
         height: 30,
         // marginBottom: 30,
     },
     loginBtn: {
-        width: "40%",
+        width: "50%",
         borderRadius: 25,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        // marginTop: 40,
+        marginTop: 10,
         backgroundColor: "#00CBA0",
+        marginBottom: 10
     },
 });
