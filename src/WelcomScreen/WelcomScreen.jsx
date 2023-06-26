@@ -43,7 +43,7 @@ export default function WelcomScreen() {
                                     color: "#679289"
                                 }} style={styles.BoxOutline}>
                                     <FontAwesome5 name="user-check" size={35} color="#679289" style={{ marginRight: "5%" }} />
-                                    Rigester
+                                    Rigister
                                 </Box>
                             </TouchableOpacity>
 

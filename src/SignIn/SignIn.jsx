@@ -29,10 +29,10 @@ export default function SignIn() {
             method: "post",
             url: Url + "/auth/api/userLogin",
             data: {
-                // Email: "test@gmail.com",
-                // Password: "1234"
-                Email: email,
-                Password: password
+                Email: "test@gmail.com",
+                Password: "1234"
+                // Email: email,
+                // Password: password
             }
         }).then((res) => {
 
@@ -57,7 +57,7 @@ export default function SignIn() {
                 end={{ x: 1, y: 0.5 }}
             >
 
-                <Header ScreenName="Sign IN" />
+                <Header ScreenName="Login" />
                 <View style={{
                     justifyContent: "center",
                     alignItems: "center",

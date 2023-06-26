@@ -4,11 +4,10 @@ import {
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../Header/Header";
-import axios from "axios";
 import { Url } from "../../Core";
+import axios from "axios";
 
 import logo from '../../assets/logo/logo1.png';
-import back from '../../assets/header-icon/back.png';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -69,7 +68,7 @@ export default function Registration() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Name."
+                                    placeholder="Name"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(Name) => setRigName(Name)}
                                 />
@@ -77,7 +76,7 @@ export default function Registration() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Email."
+                                    placeholder="Email"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(Email) => setEmail(Email)}
                                 />
@@ -85,7 +84,7 @@ export default function Registration() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Contact Number."
+                                    placeholder="Contact Number"
                                     placeholderTextColor="#003f5c"
                                     onChangeText={(ContactNum) => setContactNum(ContactNum)}
                                 />
@@ -101,7 +100,7 @@ export default function Registration() {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="Password."
+                                    placeholder="Password"
                                     placeholderTextColor="#003f5c"
                                     secureTextEntry={true}
                                     onChangeText={(Password) => setPassword(Password)}
