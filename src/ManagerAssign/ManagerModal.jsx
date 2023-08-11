@@ -17,7 +17,7 @@ const Colors = {
 
 export default function ManagerModal({ visible, onClose, data, ManagerUpdate }) {
 
-  console.log(data, "Modal data");
+  // console.log(data, "Modal data");
   let [UserData, setUserData] = useState('')
   // const UpdateManager = (item) => {
   //   console.log(item, "Update Manager Data");

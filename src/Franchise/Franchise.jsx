@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
-    StyleSheet, Text, View, Image, TextInput, Dimensions, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, Dimensions, TouchableOpacity, ScrollView, Alert
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient'
 import StoreContext from "../../GlobalState/GlobalState";
@@ -48,6 +48,7 @@ export default function Franchise() {
             }
         }).then((res) => {
             console.log(res.data, "Franchise Response");
+            Alert.alert("Alert","Franchise Create")
         }).catch(() => {
             console.log(error);
         })

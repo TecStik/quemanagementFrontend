@@ -33,14 +33,16 @@ export default function AdminHome() {
                             <Image source={franchise} style={{ width: "25%", height: windowHeight / 8.5 }} />
                             <TouchableOpacity onPress={() => navigation.navigate('Franchise')}>
 
-                                <LinearGradient
+                                {/* <LinearGradient
                                     colors={['#0F3C3A', '#1D7874', '#0F3C3A']}
                                     style={styles.numberBox}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
-                                >
+                                > */}
+                                   <View style={styles.numberBox}>
                                     <Text style={{ fontSize: 22, color: "#00CBA0", textAlign: "center", }}>Create Franchise</Text>
-                                </LinearGradient>
+                                   </View>
+                                {/* </LinearGradient> */}
                             </TouchableOpacity>
                         </View>
                         <View style={styles.container}>
